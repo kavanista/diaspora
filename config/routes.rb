@@ -30,11 +30,6 @@ Diaspora::Application.routes.draw do
     put :make_profile_photo
   end
 
-  # ActivityStreams routes
-  scope "/activity_streams", :module => "activity_streams", :as => "activity_streams" do
-    resources :photos, :controller => "photos", :only => [:create]
-  end
-
   resources :conversations do
     resources :messages, :only => [:create, :show]
     delete 'visibility' => 'conversation_visibilities#destroy'
@@ -81,7 +76,17 @@ Diaspora::Application.routes.draw do
                                       :invitations   => "invitations"} do
     get 'invitations/resend/:id' => 'invitations#resend', :as => 'invitation_resend'
   end
-  
+
+  # ActivityStreams routes
+  scope "/activity_streams", :module => "activity_streams", :as => "activity_streams" do
+    resources :photos, :controller => "photos", :only => [:create, :show, :destroy]
+    resources :notes, :controller => "notes", :only => [:create]
+  end
+
+
+  #Temporary token_authenticable route
+  resource :token, :only => [:show, :create]
+
   get 'login' => redirect('/users/sign_in')
 
   scope 'admins', :controller => :admins do
