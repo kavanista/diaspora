@@ -94,6 +94,7 @@ Diaspora::Application.routes.draw do
     get   :admin_inviter
     get   :add_invites, :as => 'add_invites'
     get   :stats, :as => 'pod_stats'
+    post   'add_oauth'   => :admin_oauth, :as => 'admin_oauth'
   end
 
   resource :profile

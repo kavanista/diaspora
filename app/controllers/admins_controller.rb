@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :redirect_unless_admin
+  #before_filter :redirect_unless_admin
 
   def user_search
     params[:user] ||= {}
@@ -29,9 +29,17 @@ class AdminsController < ApplicationController
     redirect_to user_search_path
   end
 
+<<<<<<< HEAD
   def stats
     @popular_tags = ActsAsTaggableOn::Tagging.joins(:tag).limit(15).count(:group => :tag, :order => 'count(taggings.id) DESC')
     @new_posts = Post.where(:type => ['StatusMessage','ActivityStreams::Photo'],
                             :public => true).order('created_at DESC').limit(15).all
+=======
+
+  def admin_oauth
+    client = OAuth2::Provider.client_class.create params[:o_auth2_provider_models_active_record_client]
+    puts client.inspect
+    redirect_to '/admins/user_search', :params => {:oauth => client.inspect}
+>>>>>>> wip
   end
 end
