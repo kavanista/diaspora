@@ -26,7 +26,8 @@ javascripts:
     - public/javascripts/keycodes.js
     - public/javascripts/fileuploader-custom.js
     - public/javascripts/diaspora.js
-    - public/javascripts/widgets/i18n.js
+    - public/javascripts/pages/aspects-index.js
+    - public/javascripts/helpers/i18n.js
     - public/javascripts/widgets/alert.js
     - public/javascripts/widgets/embedder.js
     - public/javascripts/widgets/timeago.js
@@ -34,7 +35,10 @@ javascripts:
     - public/javascripts/widgets/directionDetector.js
     - public/javascripts/widgets/notifications.js
     - public/javascripts/widgets/flashes.js
-    - public/javascripts/widgets/post.js
+#    - public/javascripts/widgets/post.js
+    - public/javascripts/widgets/stream.js
+    - public/javascripts/widgets/stream-element.js
+    - public/javascripts/widgets/likes.js
     - public/javascripts/widgets/hovercard.js
     - public/javascripts/widgets/lightbox.js
     - public/javascripts/widgets/notifications-badge.js

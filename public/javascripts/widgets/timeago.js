@@ -6,25 +6,24 @@
   var TimeAgo = function() {
     var self = this;
     this.selector = "abbr.timeago";
-    this.subscribe("widget/ready", function() {
-      Diaspora.widgets.subscribe("stream/scrolled stream/reloaded", self.updateTimeAgo, this);
 
+    this.subscribe("widget/ready", function(evt, element) {
+      self.element = element;
       self.updateTimeAgo();
 
-      if(Diaspora.widgets.i18n.language !== "en") {
+      if(Diaspora.I18n.language !== "en") {
 				$.each($.timeago.settings.strings, function(index) {
-	  			$.timeago.settings.strings[index] = Diaspora.widgets.i18n.t("timeago." + index);
+	  			$.timeago.settings.strings[index] = Diaspora.I18n.t("timeago." + index);
 				});
       }
     });
 
-    this.timeAgoElement = function(selector) {
-      return $((typeof selector === "string") ? selector : this.selector);
-    };
+    self.globalSubscribe("stream/scrolled stream/reloaded", this.updateTimeAgo, this);
 
-    this.updateTimeAgo = function() {
-      self.timeAgoElement().timeago();
+    this.updateTimeAgo = function(selector) {
+      $((selector) ? selector : self.element).timeago();
     };
   };
-  Diaspora.widgets.add("timeago", TimeAgo);
+
+  Diaspora.Widgets.add("TimeAgo", TimeAgo);
 })();

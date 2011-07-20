@@ -20,19 +20,19 @@ jQuery.fn.center = (function() {
   var Lightbox = function() {
     var self = this;
 
-    this.subscribe("widget/ready", function() {
+    this.subscribe("widget/ready", function(evt, post) {
       $.extend(self, {
+        post: post,
         lightbox: $("#lightbox"),
         imageset: $("#lightbox-imageset"),
         backdrop: $("#lightbox-backdrop"),
         closelink: $("#lightbox-close-link"),
         image: $("#lightbox-image"),
-        stream: $(".stream_container"),
         body: $(document.body),
         window: $(window)
       });
       
-      self.stream.delegate("a.stream-photo-link", "click", self.lightboxImageClicked);
+      self.post.delegate("a.stream-photo-link", "click", self.lightboxImageClicked);
       self.imageset.delegate("img", "click", self.imagesetImageClicked);
 
       self.window.resize(function() {
@@ -44,8 +44,12 @@ jQuery.fn.center = (function() {
         self.resetLightbox();
       });
 
-      self.body.keydown(function(evt) {
+      self.backdrop.click(function(evt) {
+        evt.preventDefault();
+        self.resetLightbox();
+      });
 
+      self.body.keydown(function(evt) {
         var imageThumb = self.imageset.find("img.selected");
 
         switch(evt.keyCode) {
@@ -84,9 +88,9 @@ jQuery.fn.center = (function() {
       evt.preventDefault();
       
       var selectedImage = $(this).find("img.stream-photo"),
-          imageUrl = selectedImage.attr("data-full-photo"),
-          images = selectedImage.parents('.stream_element').find('img.stream-photo'),
-          imageThumb;
+        imageUrl = selectedImage.attr("data-full-photo"),
+        images = selectedImage.parents('.stream_element').find('img.stream-photo'),
+        imageThumb;
 
       self.imageset.html("");
       images.each(function(index, image) {
@@ -138,5 +142,5 @@ jQuery.fn.center = (function() {
     };
   };
 
-  Diaspora.widgets.add("lightbox", Lightbox);
+  Diaspora.Widgets.add("Lightbox", Lightbox);
 })();
