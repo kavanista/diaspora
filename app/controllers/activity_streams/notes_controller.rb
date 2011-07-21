@@ -1,13 +1,21 @@
-class ActivityStreams::NotesController < ApplicationController
-  before_filter :authenticate_user!
-  skip_before_filter :verify_authenticity_token, :only => :create
+class ActivityStreams::NotesController < BaseController
 
   respond_to :json 
-
   def create
-    activity = params[:activity]
-    @note = current_user.build_post(:status_message, :text => params[:text], :public => true, :to => current_user.aspects)
-    @note.save
-    render :nothing =>true, :code => 200
+    @note = ActivityStreams::Note.from_activity(params[:activity])
+    @note.author = current_user.person
+    @note.public = true
+
+    if @note.save
+      Rails.logger.info("event=create type=activitystreams_photo")
+
+      current_user.add_to_streams(@note, current_user.aspects)
+      current_user.dispatch_post(@note, :url => post_url(@note))
+
+      render :nothing => true, :status => 201
+    else
+      render :nothing => true, :status => 422
+    end
   end
+
 end
