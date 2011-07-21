@@ -29,17 +29,16 @@ class AdminsController < ApplicationController
     redirect_to user_search_path
   end
 
-<<<<<<< HEAD
   def stats
     @popular_tags = ActsAsTaggableOn::Tagging.joins(:tag).limit(15).count(:group => :tag, :order => 'count(taggings.id) DESC')
     @new_posts = Post.where(:type => ['StatusMessage','ActivityStreams::Photo'],
                             :public => true).order('created_at DESC').limit(15).all
-=======
+  end
 
   def admin_oauth
-    client = OAuth2::Provider.client_class.create params[:o_auth2_provider_models_active_record_client]
-    puts client.inspect
-    redirect_to '/admins/user_search', :params => {:oauth => client.inspect}
->>>>>>> wip
+    client = OAuth2::Provider.client_class.new params[:o_auth2_provider_models_active_record_client]
+    client.public_key = "mom"
+    client.save!
+    redirect_to '/admins/user_search'
   end
 end

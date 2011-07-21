@@ -1,81 +1,70 @@
-
-%h3
-  = form_tag 'admin_inviter', :method => :get do
-    email to invite:
-    = text_field_tag 'identifier'
-    = submit_tag 'invite'
-
-
-
-%h3
-  user search
-= form_tag 'user_search', :method => :get do
-  username:
-  = text_field_tag 'user[username]', params[:user][:username]
-
-  email:
-  = text_field_tag 'user[email]', params[:user][:email]
-
-  invitation identifier
-  = text_field_tag 'user[invitation_identifier]', params[:user][:invitation_identifier]
-
-  invitation token:
-  = text_field_tag 'user[invitation_token]', params[:user][:invitation_token]
-  = submit_tag 'go'
+.span-16.prepend-4.append-4
+  %h3
+    = form_tag 'admin_inviter', :method => :get do
+      email to invite:
+      = text_field_tag 'identifier'
+      = submit_tag 'invite'
 
 
-= "#{@users.count} users found"
-%br
-%br
-= for user in @users
-  = user.inspect
+
+  %h3
+    user search
+  = form_tag 'user_search', :method => :get do
+    username:
+    = text_field_tag 'user[username]', params[:user][:username]
+
+    email:
+    = text_field_tag 'user[email]', params[:user][:email]
+
+    invitation identifier
+    = text_field_tag 'user[invitation_identifier]', params[:user][:invitation_identifier]
+
+    invitation token:
+    = text_field_tag 'user[invitation_token]', params[:user][:invitation_token]
+    = submit_tag 'go'
+
+
+  = "#{@users.count} users found"
   %br
-  - if user.person
-    = user.person.inspect
+  %br
+  = for user in @users
+    = user.inspect
     %br
-    - if user.person.profile
-      = user.person.profile.inspect
+    - if user.person
+      = user.person.inspect
+      %br
+      - if user.person.profile
+        = user.person.profile.inspect
+      %br
+    = "invite token: #{accept_invitation_url(user, :invitation_token => user.invitation_token)}" if user.invitation_token
+    = link_to "add 10 invites for this user", add_invites_path(:user_id => user.id)
     %br
-  = "invite token: #{accept_invitation_url(user, :invitation_token => user.invitation_token)}" if user.invitation_token
-  = link_to "add 10 invites for this user", add_invites_path(:user_id => user.id)
+    %br
+    %br
   %br
-  %br
-  %br
-%br
-= javascript_include_tag 'apiconsole'
-#query
-  %h3 api console
-  = text_field_tag :api
-  = submit_tag 'ping this api', :id => 'api_submit'
+  = form_for OAuth2::Provider.client_class.new, :url => admin_oauth_path do |client|
+    %p
+      = client.label :name
+      = client.text_field :name
 
-  response:
-  %br
-  %br
-  #resp
+    %p
+      = client.label :permissions_overview
+      = client.text_field :permissions_overview
 
 
-%br
-  post to Diaspora v1
-= params[:oauth]
-= form_for OAuth2::Provider.client_class.new, :url => admin_oauth_path do |client|
-  %p
-    = client.label :name
-    = client.text_field :name
+    %p
+      = client.label :description
+      = client.text_field :description
+    %p
+      = client.label :application_base_url
+      = client.text_field :application_base_url
+    %p
+      = client.label :icon_url
+      = client.text_field :icon_url
 
-  %p
-    = client.label :permissions_overview
-    = client.text_field :permissions_overview
-
-
-  %p
-    = client.label :description
-    = client.text_field :description
-  %p
-    = client.label :application_base_url
-    = client.text_field :application_base_url
-  %p
-    = client.label :icon_url
-    = client.text_field :icon_url
-
-  %p
-    = client.submit
+    %p
+      = client.submit
+  
+    %ul
+      = OAuth2::Provider.client_class.all.each do |c|
+        %li= c.inspect
