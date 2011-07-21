@@ -5,38 +5,40 @@
 describe("Diaspora", function() {
   describe("widgets", function() {
     describe("notifications", function() {
-      var changeNotificationCountSpy;
+      var changeNotificationCountSpy, notifications;
 
       beforeEach(function() {
-        changeNotificationCountSpy = spyOn(Diaspora.widgets.notifications, "changeNotificationCount").andCallThrough();
+        notifications = Diaspora.BaseWidget.instantiate("Notifications");
+        
+        changeNotificationCountSpy = spyOn(notifications, "changeNotificationCount").andCallThrough();
         $("#jasmine_content").html("<div id='notifications'></div>");
-        Diaspora.widgets.notifications.publish("widget/ready");
+        notifications.publish("widget/ready");
         changeNotificationCountSpy.reset();
       });
 
       describe("decrementCount", function() {
         it("decrements Notifications.count", function() {
-          var originalCount = Diaspora.widgets.notifications.count;
-          Diaspora.widgets.notifications.decrementCount();
-          expect(Diaspora.widgets.notifications.count).toBeLessThan(originalCount);
+          var originalCount = notifications.count;
+          notifications.decrementCount();
+          expect(notifications.count).toBeLessThan(originalCount);
         });
 
         it("calls Notifications.changeNotificationCount", function() {
-          Diaspora.widgets.notifications.decrementCount();
-          expect(Diaspora.widgets.notifications.changeNotificationCount).toHaveBeenCalled();
+          notifications.decrementCount();
+          expect(notifications.changeNotificationCount).toHaveBeenCalled();
         })
       });
 
       describe("incrementCount", function() {
         it("increments Notifications.count", function() {
-          var originalCount = Diaspora.widgets.notifications.count;
-          Diaspora.widgets.notifications.incrementCount();
-          expect(Diaspora.widgets.notifications.count).toBeGreaterThan(originalCount);
+          var originalCount = notifications.count;
+          notifications.incrementCount();
+          expect(notifications.count).toBeGreaterThan(originalCount);
         });
 
         it("calls Notifications.changeNotificationCount", function() {
-          Diaspora.widgets.notifications.incrementCount();
-          expect(Diaspora.widgets.notifications.changeNotificationCount).toHaveBeenCalled();
+          notifications.incrementCount();
+          expect(notifications.changeNotificationCount).toHaveBeenCalled();
         });
       });
 
@@ -44,7 +46,7 @@ describe("Diaspora", function() {
         it("prepends a div to div#notifications", function() {
           expect($("#notifications div").length).toEqual(0);
 
-          Diaspora.widgets.notifications.showNotification({
+          notifications.showNotification({
             html: '<div class="notification"></div>'
           });
 
@@ -52,14 +54,14 @@ describe("Diaspora", function() {
         });
 
         it("only increments the notification count if specified to do so", function() {
-          var originalCount = Diaspora.widgets.notifications.count;
+          var originalCount = notifications.count;
 
-          Diaspora.widgets.notifications.showNotification({
+          notifications.showNotification({
             html: '<div class="notification"></div>',
             incrementCount: false
           });
 
-          expect(Diaspora.widgets.notifications.count).toEqual(originalCount);
+          expect(notifications.count).toEqual(originalCount);
 
         });
       });

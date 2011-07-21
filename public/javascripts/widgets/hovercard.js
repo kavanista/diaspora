@@ -4,12 +4,10 @@
 
     self.jXHRs = [];
 
-    self.subscribe("widget/ready", function(evt, hoverCard, hoverCardContainer, hoverCardDropDownContainer) {
+    self.subscribe("widget/ready", function(evt, hoverCard) {
       self.personCache = new self.Cache();
       self.dropdownCache = new self.Cache();
 
-      var card = $("#hovercard");
-      
       self.hoverCard = {
         tip: $("#hovercard_container"),
         dropdownContainer: $("#hovercard_dropdown_container"),
@@ -17,10 +15,10 @@
           left: -10,
           top: 13
         },
-        personLink: card.find("a.person"),
-        avatar: card.find(".avatar"),
-        dropdown: card.find(".dropdown_list"),
-        hashtags: card.find(".hashtags")
+        personLink: hoverCard.find("a.person"),
+        avatar: hoverCard.find(".avatar"),
+        dropdown: hoverCard.find(".dropdown_list"),
+        hashtags: hoverCard.find(".hashtags")
       };
 
       $(document.body).delegate("a.hovercardable:not(.self)", "hover", self.handleHoverEvent);
@@ -93,7 +91,7 @@
           self.timeout = clearTimeout(self.timeout);
           self.hoverCard.tip.hide();
           self.hoverCard.dropdownContainer.html("");
-      };
+      }
 
       if((typeof delayed === "boolean" && delayed) || (typeof delayed === "object" && delayed.type === "mouseleave")) {
         self.hoverCardTimeout = setTimeout(callback, 20);
@@ -134,5 +132,5 @@
     };
   };
 
-  Diaspora.widgets.add("hoverCard", HoverCard);
+  Diaspora.Widgets.add("HoverCard", HoverCard);
 })();

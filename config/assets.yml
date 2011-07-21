@@ -27,17 +27,18 @@ javascripts:
     - public/javascripts/fileuploader-custom.js
     - public/javascripts/diaspora.js
     - public/javascripts/pages/aspects-index.js
+    - public/javascripts/pages/people-show.js
     - public/javascripts/helpers/i18n.js
-    - public/javascripts/widgets/alert.js
+    - public/javascripts/helpers/alert.js
     - public/javascripts/widgets/embedder.js
     - public/javascripts/widgets/timeago.js
     - public/javascripts/widgets/infinite-scroll.js
-    - public/javascripts/widgets/directionDetector.js
+    - public/javascripts/widgets/direction-detector.js
     - public/javascripts/widgets/notifications.js
-    - public/javascripts/widgets/flashes.js
-#    - public/javascripts/widgets/post.js
+    - public/javascripts/widgets/flash-messages.js
     - public/javascripts/widgets/stream.js
     - public/javascripts/widgets/stream-element.js
+    - public/javascripts/widgets/comment-stream.js
     - public/javascripts/widgets/likes.js
     - public/javascripts/widgets/hovercard.js
     - public/javascripts/widgets/lightbox.js

@@ -13,7 +13,7 @@
         timeAgo: self.instantiate("TimeAgo", element.find("abbr.timeago"))
       });
 
-      this.globalSubscribe("post/" + self.postGuid + "/comment/added", function(evt, comment) {
+      self.globalSubscribe("post/" + self.postGuid + "/comment/added", function(evt, comment) {
          self.commentStream.publish("comment/added", comment);
        });
     });

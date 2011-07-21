@@ -9,7 +9,7 @@ var WebSocketReceiver = {
       if (websocket_enabled) {
        /* Diaspora.widgets.notifications.showNotification({
           html: '<div class="notification">' +
-              Diaspora.widgets.i18n.t("web_sockets.disconnected") +
+              Diaspora.I18n.t("web_sockets.disconnected") +
             '</div>',
           incrementCount: false
         }); TODO:figure out why this fires so often */
@@ -78,7 +78,7 @@ var WebSocketReceiver = {
 
 
   processNotification: function(notification){
-    Diaspora.widgets.notifications.showNotification(notification);
+    Diaspora.Page.notifications.showNotification(notification);
   },
 
   processRetraction: function(post_id){
@@ -123,8 +123,8 @@ var WebSocketReceiver = {
       }
     }
 
-    Diaspora.widgets.timeago.updateTimeAgo();
-    Diaspora.widgets.directionDetector.updateBinds();
+    Diaspora.Page.timeAgo.updateTimeAgo();
+    Diaspora.Page.directionDetector.updateBinds();
   },
 
   processLike: function(targetGUID, html) {

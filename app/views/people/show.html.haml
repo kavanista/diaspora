@@ -9,6 +9,9 @@
 - content_for :page_title do
   = @person.name
 
+:javascript
+  Diaspora.Page = "PeopleShow"
+
 .span-6
   = render :partial => 'people/profile_sidebar', :locals => {:person => @person, :contact => @contact }
 

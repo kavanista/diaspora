@@ -7,7 +7,7 @@ describe("Stream", function() {
   beforeEach(function() {
     jasmine.Clock.useMock();
     spec.loadFixture('aspects_index_with_posts');
-    Diaspora.widgets.i18n.locale = { };
+    Diaspora.I18n.locale = { };
   });
 
   describe("setUpLives", function() {
@@ -23,7 +23,7 @@ describe("Stream", function() {
   describe("initialize", function() {
 
     it("adds a 'show more' links to long posts", function() {
-      Diaspora.widgets.i18n.loadLocale(
+      Diaspora.I18n.loadLocale(
         {show_more: 'Placeholder'}, 'en');
       Stream.initialize();
       stream_element = $('#main_stream .stream_element:first');
@@ -49,7 +49,7 @@ describe("Stream", function() {
 
     it("changes the text on the show comments link", function() {
       link = $("a.toggle_post_comments");
-      Diaspora.widgets.i18n.loadLocale(
+      Diaspora.I18n.loadLocale(
         {'comments' : {'show': 'comments.show pl'}}, 'en');
       expect(link.text()).toEqual("Hide all comments");
       Stream.toggleComments.call(

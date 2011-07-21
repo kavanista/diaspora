@@ -17,9 +17,9 @@ var ContentUpdater = {
         streamElement.find("label").inFieldLabels();
       });
 
-      Diaspora.widgets.publish("stream/postAdded", [postGUID]);
-      Diaspora.widgets.timeago.updateTimeAgo();
-      Diaspora.widgets.directionDetector.updateBinds();
+      Diaspora.Page.publish("stream/postAdded", [postGUID]);
+      Diaspora.Page.timeAgo.updateTimeAgo();
+      Diaspora.Page.directionDetector.updateBinds();
     }
   },
 

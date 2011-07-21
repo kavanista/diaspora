@@ -16,11 +16,11 @@ var View = {
       jQuery("#facebox label").inFieldLabels();
     });
 
-    Diaspora.widgets.subscribe("stream/scrolled", function() {
+    Diaspora.Page.subscribe("stream/scrolled", function() {
       $('#main_stream .comments label').inFieldLabels();
     });
 
-    Diaspora.widgets.subscribe("stream/reloaded", function() {
+    Diaspora.Page.subscribe("stream/reloaded", function() {
       $('#main_stream .comments label').inFieldLabels();
     });
 
@@ -56,8 +56,8 @@ var View = {
           'extraSpace': 5
         });
     }
-    Diaspora.widgets.subscribe("stream/scrolled", startAutoResize)
-    Diaspora.widgets.subscribe("stream/reloaded", startAutoResize)
+    Diaspora.Page.subscribe("stream/scrolled", startAutoResize)
+    Diaspora.Page.subscribe("stream/reloaded", startAutoResize)
 
     /* Webfinger form ajaxy loading */
     $(this.webFingerForm.selector)
@@ -71,7 +71,7 @@ var View = {
     /* facebox */
     $('a[rel*=facebox]').facebox();
     $(document).bind('reveal.facebox', function() {
-      Diaspora.widgets.directionDetector.updateBinds();
+      Diaspora.Page.directionDetector.updateBinds();
     });
 
     /* facebox 'done' buttons */

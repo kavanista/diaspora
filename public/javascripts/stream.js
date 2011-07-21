@@ -7,8 +7,8 @@ var Stream = {
   selector: "#main_stream",
 
   initialize: function() {
-    Diaspora.widgets.timeago.updateTimeAgo();
-    Diaspora.widgets.directionDetector.updateBinds();
+    Diaspora.Page.timeAgo.updateTimeAgo();
+    Diaspora.Page.directionDetector.updateBinds();
 
     $(".status_message_delete").tipsy({
       trigger: "hover",
@@ -22,7 +22,7 @@ var Stream = {
     $(".content p", this.selector).expander({
       slicePoint: 400,
       widow: 12,
-      expandText: Diaspora.widgets.i18n.t("show_more"),
+      expandText: Diaspora.I18n.t("show_more"),
       userCollapse: false
     });
 
@@ -30,7 +30,7 @@ var Stream = {
     $(".comment .content span", this.selector).expander({
       slicePoint: 200,
       widow: 400,
-      expandText: Diaspora.widgets.i18n.t("show_more"),
+      expandText: Diaspora.I18n.t("show_more"),
       userCollapse: false
     });
   },
@@ -59,7 +59,7 @@ var Stream = {
     });
 
     $(".new_comment", this.selector).live("ajax:failure", function() {
-       Diaspora.widgets.alert.alert(Diaspora.widgets.i18n.t("failed_to_post_message"));
+       Diaspora.Alert.show(Diaspora.I18n.t("failed_to_post_message"));
     });
 
     $(".comment .comment_delete", this.selector).live("ajax:success", function() {
@@ -141,7 +141,7 @@ var Stream = {
         toggle = this;
 
     if( commentList.hasClass('loaded') ){
-        toggle.html(Diaspora.widgets.i18n.t("comments.hide"));
+        toggle.html(Diaspora.I18n.t("comments.hide"));
         commentList.removeClass('hidden');
     }
     else {
@@ -149,10 +149,10 @@ var Stream = {
       $.ajax({
         url: this.attr('href'),
         success: function(data){
-          toggle.html(Diaspora.widgets.i18n.t("comments.hide"));
+          toggle.html(Diaspora.I18n.t("comments.hide"));
           commentList.html(data)
                      .addClass('loaded');
-          Diaspora.widgets.publish("stream/scrolled")
+          Diaspora.Page.publish("stream/scrolled")
         }
       });
     }
@@ -161,7 +161,7 @@ var Stream = {
   hideComments: function(){
     var commentList = this.closest('.stream_element').find('ul.comments');
     commentList.addClass('hidden');
-    this.html(Diaspora.widgets.i18n.t("comments.show"));
+    this.html(Diaspora.I18n.t("comments.show"));
   },
 
   focusNewComment: function(toggle, evt) {
@@ -186,6 +186,6 @@ var Stream = {
 $(document).ready(function() {
   if( $(Stream.selector).length == 0 ) { return }
   Stream.initializeLives();
-  Diaspora.widgets.subscribe("stream/reloaded", Stream.initialize, Stream);
-  Diaspora.widgets.publish("stream/reloaded");
+  Diaspora.Page.subscribe("stream/reloaded", Stream.initialize, Stream);
+  Diaspora.Page.publish("stream/reloaded");
 });

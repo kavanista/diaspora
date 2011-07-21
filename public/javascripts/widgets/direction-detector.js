@@ -12,7 +12,7 @@
     this.subscribe("widget/ready", function() {
       self.updateBinds();
     
-      Diaspora.widgets.subscribe("stream/scrolled", function() {
+      self.globalSubscribe("stream/scrolled", function() {
 				self.updateBinds();
       });
     });
@@ -82,5 +82,5 @@
     };
   };
 
-  Diaspora.widgets.add("directionDetector", DirectionDetector);
+  Diaspora.Widgets.add("DirectionDetector", DirectionDetector);
 })();
