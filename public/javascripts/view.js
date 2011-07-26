@@ -36,10 +36,6 @@ var View = {
     /* Submit the form when the user hits enter */
       .keypress(this.search.keyPress);
 
-    /* User menu */
-    $(this.userMenu.selector)
-      .click(this.userMenu.click);
-
     /* Dropdowns */
     $(this.dropdowns.selector)
       .live('click', this.dropdowns.click);
@@ -65,7 +61,6 @@ var View = {
 
     $(document.body)
       .click(this.dropdowns.removeFocus)
-      .click(this.userMenu.removeFocus)
       .click(this.reshareButton.removeFocus);
 
     /* facebox */
@@ -210,20 +205,6 @@ var View = {
     },
     selector: ".dropdown > .toggle",
     parentSelector: ".dropdown > .wrapper"
-  },
-
-  userMenu: {
-    click: function(evt) {
-      $(this).parent().toggleClass("active");
-      evt.preventDefault();
-    },
-    removeFocus: function(evt) {
-      var $target = $(evt.target);
-      if(!$target.closest("#user_menu").length || ($target.attr('href') != undefined && $target.attr('href') != '#')) {
-        $(View.userMenu.selector).parent().removeClass("active");
-      }
-    },
-    selector: "#user_menu li:first-child"
   },
 
   webFingerForm: {

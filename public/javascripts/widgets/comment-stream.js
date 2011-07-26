@@ -9,6 +9,10 @@
         comments: []
       });
 
+      self.commentStream.delegate(".new_comment", "ajax:failure", function() {
+        Diaspora.Alert.show(Diaspora.I18n.t("failed_to_post_message"));
+      });
+
       self.instantiateCommentWidgets();
 
       self.globalSubscribe("commentStream/" + self.commentStream.attr("id") + "/loaded", self.instantiateCommentWidgets);

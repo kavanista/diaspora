@@ -14,6 +14,7 @@ Diaspora.Pages.AspectsIndex = function() {
       document.find("#notification_dropdown")
     );
 
+    self.userDropdown = self.instantiate("UserDropdown", document.find("#user_menu"));
     self.hoverCard = self.instantiate("HoverCard", document.find("#hovercard"));
     self.infiniteScroll = self.instantiate("InfiniteScroll");
     self.timeAgo = self.instantiate("TimeAgo", "abbr.timeago");
