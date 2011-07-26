@@ -39,6 +39,8 @@ javascripts:
     - public/javascripts/widgets/stream.js
     - public/javascripts/widgets/stream-element.js
     - public/javascripts/widgets/comment-stream.js
+    - public/javascripts/widgets/comment-toggler.js
+    - public/javascripts/widgets/comment.js
     - public/javascripts/widgets/likes.js
     - public/javascripts/widgets/hovercard.js
     - public/javascripts/widgets/lightbox.js

@@ -14,20 +14,20 @@
 
       $.extend(whatToExtend, {
 	      eventsContainer: $({}),
-        publish: $.proxy(function(eventName, args) {
+        publish: function(eventName, args) {
           var eventNames = eventName.split(" ");
 
           for(var eventName in eventNames) {
             this.eventsContainer.trigger(eventNames[eventName], args);
           }
-        }, whatToExtend),
-        subscribe: $.proxy(function(eventName, callback, context) {
+        },
+        subscribe: function(eventName, callback, context) {
           var eventNames = eventName.split(" ");
 
           for(var eventName in eventNames) {
             this.eventsContainer.bind(eventNames[eventName], $.proxy(callback, context));
           }
-        }, whatToExtend)
+        }
       });
 
       return whatToExtend;
@@ -43,7 +43,6 @@
 
   Diaspora.BaseWidget = {
     instantiate: function(Widget, element) {
-      console.log(Widget);
       $.extend(Diaspora.Widgets[Widget].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
       var widget = new Diaspora.Widgets[Widget](),
         args = Array.prototype.slice.call(arguments, 1);
@@ -54,19 +53,13 @@
     },
 
     globalSubscribe: function(eventName, callback, context) {
-      Diaspora.Page.subscribe(eventName, callback, context);
-    },
+      if(typeof callback === "undefined") { throw new Error("Callback must be defined for event: " + eventName); }
+      Diaspora.page.subscribe(eventName, callback, context);
+    },  
 
     globalPublish: function(eventName, args) {
-      Diaspora.Page.publish(eventName, args);
+      Diaspora.page.publish(eventName, args);
     }
-  };
-
-  Diaspora.initializePage = function() {
-    $.extend(Diaspora.Pages[Diaspora.Page].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
-
-    Diaspora.Page = new Diaspora.Pages[Diaspora.Page]();
-    Diaspora.Page.publish("page/ready", [$(document)])
   };
 
   window.Diaspora = Diaspora;
@@ -74,5 +67,8 @@
 
 
 $(function() {
-  Diaspora.initializePage();
+  $.extend(Diaspora.Pages[Diaspora.Page].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
+
+  Diaspora.page = new Diaspora.Pages[Diaspora.Page]();
+  Diaspora.page.publish("page/ready", [$(document)])
 });

@@ -52,7 +52,7 @@ var Stream = {
   },
 
   setUpComments: function(){
-    $("a.toggle_post_comments:not(.show)", this.selector).live('click', Stream.toggleComments);
+//    $("a.toggle_post_comments:not(.show)", this.selector).live('click', Stream.toggleComments);
     // comment link form focus
     $(".focus_comment_textarea", this.selector).live('click', function(evt) {
       Stream.focusNewComment($(this), evt);
@@ -123,46 +123,46 @@ var Stream = {
       }
     });
   },
-
-  toggleComments: function(evt) {
-    evt.preventDefault();
-
-    var $toggler = $(this),
-        comments = $toggler.closest('.stream_element').find('ul.comments');
-
-    if (comments.hasClass('loaded') && !comments.hasClass('hidden')){
-      Stream.hideComments.apply($toggler);
-    }else {
-      Stream.showComments.apply($toggler);
-    }
-  },
-  showComments: function(){
-    var commentList = this.closest('.stream_element').find('ul.comments'),
-        toggle = this;
-
-    if( commentList.hasClass('loaded') ){
-        toggle.html(Diaspora.I18n.t("comments.hide"));
-        commentList.removeClass('hidden');
-    }
-    else {
-      toggle.append("<img alt='loading' src='/images/ajax-loader.gif' />");
-      $.ajax({
-        url: this.attr('href'),
-        success: function(data){
-          toggle.html(Diaspora.I18n.t("comments.hide"));
-          commentList.html(data)
-                     .addClass('loaded');
-          Diaspora.Page.publish("stream/scrolled")
-        }
-      });
-    }
-  },
-
-  hideComments: function(){
-    var commentList = this.closest('.stream_element').find('ul.comments');
-    commentList.addClass('hidden');
-    this.html(Diaspora.I18n.t("comments.show"));
-  },
+//
+//  toggleComments: function(evt) {
+//    evt.preventDefault();
+//
+//    var $toggler = $(this),
+//        comments = $toggler.closest('.stream_element').find('ul.comments');
+//
+//    if (comments.hasClass('loaded') && !comments.hasClass('hidden')){
+//      Stream.hideComments.apply($toggler);
+//    }else {
+//      Stream.showComments.apply($toggler);
+//    }
+//  },
+//  showComments: function(){
+//    var commentList = this.closest('.stream_element').find('ul.comments'),
+//        toggle = this;
+//
+//    if( commentList.hasClass('loaded') ){
+//        toggle.html(Diaspora.I18n.t("comments.hide"));
+//        commentList.removeClass('hidden');
+//    }
+//    else {
+//      toggle.append("<img alt='loading' src='/images/ajax-loader.gif' />");
+//      $.ajax({
+//        url: this.attr('href'),
+//        success: function(data){
+//          toggle.html(Diaspora.I18n.t("comments.hide"));
+//          commentList.html(data)
+//                     .addClass('loaded');
+//          Diaspora.Page.publish("stream/scrolled")
+//        }
+//      });
+//    }
+//  },
+//
+//  hideComments: function(){
+//    var commentList = this.closest('.stream_element').find('ul.comments');
+//    commentList.addClass('hidden');
+//    this.html(Diaspora.I18n.t("comments.show"));
+//  },
 
   focusNewComment: function(toggle, evt) {
     evt.preventDefault();

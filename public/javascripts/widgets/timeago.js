@@ -16,9 +16,10 @@
 	  			$.timeago.settings.strings[index] = Diaspora.I18n.t("timeago." + index);
 				});
       }
+
+      self.globalSubscribe("stream/scrolled stream/reloaded", self.updateTimeAgo);
     });
 
-    self.globalSubscribe("stream/scrolled stream/reloaded", this.updateTimeAgo, this);
 
     this.updateTimeAgo = function(selector) {
       $((selector) ? selector : self.element).timeago();
