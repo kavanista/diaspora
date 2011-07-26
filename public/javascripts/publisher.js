@@ -395,5 +395,5 @@ var Publisher = {
 
 $(document).ready(function() {
   Publisher.initialize();
-  Diaspora.Page.subscribe("stream/reloaded", Publisher.initialize);
+//  Diaspora.Page.subscribe("stream/reloaded", Publisher.initialize);
 });

@@ -16,18 +16,13 @@ var View = {
       jQuery("#facebox label").inFieldLabels();
     });
 
-    Diaspora.Page.subscribe("stream/scrolled", function() {
-      $('#main_stream .comments label').inFieldLabels();
-    });
-
-    Diaspora.Page.subscribe("stream/reloaded", function() {
-      $('#main_stream .comments label').inFieldLabels();
-    });
-
-
-    /* Showing debug messages  */
-    $(this.debug.selector)
-      .click(this.debug.click);
+//    Diaspora.Page.subscribe("stream/scrolled", function() {
+//      $('#main_stream .comments label').inFieldLabels();
+//    });
+//
+//    Diaspora.Page.subscribe("stream/reloaded", function() {
+//      $('#main_stream .comments label').inFieldLabels();
+//    });
 
     /* "Toggling" the search input */
     $(this.search.selector)
@@ -40,9 +35,6 @@ var View = {
     $(this.dropdowns.selector)
       .live('click', this.dropdowns.click);
 
-    /* Sending a request message */
-    $(this.newRequest.selector)
-      .live("submit", this.newRequest.submit);
 
     /* Autoexpand textareas */
     var startAutoResize = function() {
@@ -52,8 +44,8 @@ var View = {
           'extraSpace': 5
         });
     }
-    Diaspora.Page.subscribe("stream/scrolled", startAutoResize)
-    Diaspora.Page.subscribe("stream/reloaded", startAutoResize)
+//    Diaspora.Page.subscribe("stream/scrolled", startAutoResize)
+//    Diaspora.Page.subscribe("stream/reloaded", startAutoResize)
 
     /* Webfinger form ajaxy loading */
     $(this.webFingerForm.selector)
@@ -84,27 +76,6 @@ var View = {
     });
   },
 
-  addAspectButton: {
-    click: function() {
-      $("#aspect_name").focus();
-    },
-    selector: ".add_aspect_button"
-  },
-
-  debug: {
-    click: function() {
-      $("#debug_more").toggle("fast");
-    },
-    selector: "#debug_info"
-  },
-
-  newRequest: {
-    submit: function() {
-      $(this).hide().parent().find(".stream_element").removeClass("hidden");
-    },
-    selector: ".new_request"
-  },
-
   search: {
     blur: function() {
       $(this).removeClass("active");
@@ -124,31 +95,6 @@ var View = {
   },
 
   tooltips: {
-    addAspect: {
-      bind: function() {
-        $(".add_aspect_button", "#aspect_nav").tipsy({
-          gravity: ($('html').attr('dir') == 'rtl')? "e" : "w"
-        });
-      }
-    },
-
-    aspect_nav: {
-      bind: function() {
-        $("a", "#aspect_nav").tipsy({
-          gravity:"n",
-          delayIn: 600
-        });
-      }
-    },
-
-    avatars: {
-      bind: function() {
-        $("#aspect_listings img.avatar, #manage_aspect_zones img.avatar").tipsy({
-          live: true
-        });
-      }
-    },
-
     public_badge: {
       bind: function() {
         $(".public_badge img").tipsy({
@@ -161,15 +107,6 @@ var View = {
       bind: function() {
         $(".conversation_participants img").tipsy({
           live: true
-        });
-      }
-    },
-
-    whatIsThis: {
-      bind: function() {
-        $(".what_is_this").tipsy({
-          live: true,
-          delayIn: 400
         });
       }
     },
@@ -205,18 +142,9 @@ var View = {
     },
     selector: ".dropdown > .toggle",
     parentSelector: ".dropdown > .wrapper"
-  },
-
-  webFingerForm: {
-    submit: function(evt) {
-      $(evt.currentTarget).siblings("#loader").show();
-      $("#request_result li:first").hide();
-    },
-    selector: ".webfinger_form"
   }
 };
 
 $(function() {
-  /* Make sure this refers to View, not the document */
-  View.initialize.apply(View);
+  View.initialize();
 });

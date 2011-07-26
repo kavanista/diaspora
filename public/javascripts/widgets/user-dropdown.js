@@ -7,7 +7,7 @@
         userDropdown: userDropdown
       });
 
-      userDropdown.click(self.toggleDropdown);
+      self.userDropdown.click(self.toggleDropdown);
       $(document.body).click(self.hideDropdown);
     });
 
@@ -18,7 +18,7 @@
       self.userDropdown.toggleClass("active");
     };
 
-    this.hideDropdown = function(evt) {
+    this.hideDropdown = function() {
       if(self.userDropdown.hasClass("active") && !$(this).parents("#user_menu").length) {
         self.userDropdown.removeClass("active");
       }

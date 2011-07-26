@@ -142,6 +142,6 @@ var Stream = {
 $(document).ready(function() {
   if( $(Stream.selector).length == 0 ) { return }
   Stream.initializeLives();
-  Diaspora.Page.subscribe("stream/reloaded", Stream.initialize, Stream);
-  Diaspora.Page.publish("stream/reloaded");
+//  Diaspora.page.subscribe("stream/reloaded", Stream.initialize, Stream);
+//  Diaspora.page.publish("stream/reloaded");
 });
