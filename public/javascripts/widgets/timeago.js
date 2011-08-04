@@ -16,8 +16,6 @@
 	  			$.timeago.settings.strings[index] = Diaspora.I18n.t("timeago." + index);
 				});
       }
-
-      self.globalSubscribe("stream/scrolled stream/reloaded", self.updateTimeAgo);
     });
 
     this.timeAgoElement = function(selector) {
@@ -25,13 +23,17 @@
     };
 
     this.updateTimeAgo = function() {
-      if (arguments.length > 1){
-        var new_elements = Array.prototype.slice.call(arguments,1);
-        $(new_elements).find(self.selector).timeago();
-      }else{
+      if (arguments.length > 1) {
+        var newElements = Array.prototype.slice.call(arguments,1);
+        $(newElements).find(self.selector).timeago();
+      }
+      else {
         self.timeAgoElement().timeago();
       }
     };
+
+    this.globalSubscribe("stream/scrolled stream/reloaded", self.updateTimeAgo);
   };
-  Diaspora.widgets.add("timeago", TimeAgo);
+
+  Diaspora.Widgets.add("TimeAgo", TimeAgo);
 })();

@@ -26,10 +26,10 @@ javascripts:
     - public/javascripts/keycodes.js
     - public/javascripts/fileuploader-custom.js
     - public/javascripts/diaspora.js
-    - public/javascripts/pages/aspects-index.js
-    - public/javascripts/pages/people-show.js
+    - public/javascripts/pages/*.js
     - public/javascripts/helpers/i18n.js
     - public/javascripts/helpers/alert.js
+    - public/javascripts/widgets/header.js
     - public/javascripts/widgets/user-dropdown.js
     - public/javascripts/widgets/embedder.js
     - public/javascripts/widgets/timeago.js

@@ -16,7 +16,7 @@ var View = {
       jQuery("#facebox label").inFieldLabels();
     });
 
-    Diaspora.Page.subscribe("stream/scrolled", function() {
+    Diaspora.page.subscribe("stream/scrolled", function() {
       var new_elements = Array.prototype.slice.call(arguments,1)
       $(new_elements).find('label').inFieldLabels();
     });
@@ -53,10 +53,6 @@ var View = {
     }
 //    Diaspora.Page.subscribe("stream/scrolled", startAutoResize)
 //    Diaspora.Page.subscribe("stream/reloaded", startAutoResize)
-
-    /* Webfinger form ajaxy loading */
-    $(this.webFingerForm.selector)
-      .submit(this.webFingerForm.submit);
 
     $(document.body)
       .click(this.dropdowns.removeFocus)

@@ -13,6 +13,29 @@
         Diaspora.Alert.show(Diaspora.I18n.t("failed_to_post_message"));
       });
 
+      // doesn't belong here.
+      self.commentStream.parents(".stream_element").delegate("a.focus_comment_textarea", "click", function(evt) {
+        evt.preventDefault();
+
+        var post = $(this).closest(".stream_element"),
+          commentBlock = post.find(".new_comment_form_wrapper"),
+          commentForm = commentBlock.find("form"),
+          textarea = post.find(".new_comment textarea");
+
+        if(commentBlock.hasClass("hidden")) {
+          commentBlock.removeClass("hidden");
+          commentForm.addClass("open");
+          textarea.focus();
+        } else {
+          if(commentBlock.children().length <= 1) {
+            commentBlock.addClass("hidden").removeClass("open");
+            
+          } else {
+            textarea.focus();
+          }
+        }
+      });
+
       self.instantiateCommentWidgets();
 
       self.globalSubscribe("commentStream/" + self.commentStream.attr("id") + "/loaded", self.instantiateCommentWidgets);

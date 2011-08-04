@@ -1,9 +1,9 @@
-Diaspora.Pages.AspectsIndex = function() {
+Diaspora.Pages.TagsShow = function() {
   var self = this;
 
   this.subscribe("page/ready", function(evt, document) {
-    self.stream = self.instantiate("Stream", document.find("#main_stream"));
-    self.header = self.instantiate("Header", document.find("header"));
+    self.instantiate("Header", document.find("header"));
+
 
     self.hoverCard = self.instantiate("HoverCard", document.find("#hovercard"));
     self.infiniteScroll = self.instantiate("InfiniteScroll");

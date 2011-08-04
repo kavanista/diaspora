@@ -43,6 +43,7 @@
 
   Diaspora.BaseWidget = {
     instantiate: function(Widget, element) {
+      if(typeof Diaspora.Widgets[Widget] === "undefined") { throw new Error("Widget " + Widget + " does not exist"); }
       $.extend(Diaspora.Widgets[Widget].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
       var widget = new Diaspora.Widgets[Widget](),
         args = Array.prototype.slice.call(arguments, 1);
@@ -67,8 +68,9 @@
 
 
 $(function() {
-  $.extend(Diaspora.Pages[Diaspora.Page].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
+  var Page = Diaspora.Pages[Diaspora.Page];
+  $.extend(Page.prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
 
-  Diaspora.page = new Diaspora.Pages[Diaspora.Page]();
-  Diaspora.page.publish("page/ready", [$(document)])
+  Diaspora.page = new Page();
+  Diaspora.page.publish("page/ready", [$(document.body)])
 });
