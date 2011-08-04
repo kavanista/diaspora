@@ -11,6 +11,19 @@ describe Person do
     @person  = Factory.create(:person)
   end
 
+  context 'scopes' do
+    describe '.local' do
+      it 'returns only local people' do
+        Person.local =~ [@person]
+      end
+    end
+
+    describe '.remote' do
+      it 'returns only local people' do
+        Person.remote =~ [@user.person]
+      end
+    end
+  end
   describe "delegating" do
     it "delegates last_name to the profile" do
       @person.last_name.should == @person.profile.last_name
@@ -36,12 +49,11 @@ describe Person do
     end
   end
 
-
   describe '#diaspora_handle' do
     context 'local people' do
       it 'uses the pod config url to set the diaspora_handle' do
         new_person = User.build(:username => "foo123", :email => "foo123@example.com", :password => "password", :password_confirmation => "password").person
-        new_person.diaspora_handle.should == "foo123@#{AppConfig[:pod_uri].host}"
+        new_person.diaspora_handle.should == "foo123@#{AppConfig[:pod_uri].authority}"
       end
     end
 
@@ -227,8 +239,8 @@ describe Person do
       people.empty?.should be true
     end
 
-    it 'should return nothing on a two character query' do
-      people = Person.search("in", @user)
+    it 'should return nothing on a one character query' do
+      people = Person.search("i", @user)
       people.empty?.should be true
     end
 
@@ -377,5 +389,8 @@ describe Person do
       @person.as_json(:includes => "tags").
         should == @person.as_json.merge(:tags =>  @person.profile.tags.map{|t| "##{t.name}"})
     end
+  end
+
+  describe '.featured_users' do
   end
 end

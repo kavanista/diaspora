@@ -41,16 +41,24 @@ module ApplicationHelper
     person_image_link(current_user.person)
   end
 
-  def person_image_tag(person, size=:thumb_small)
+  def person_image_tag(person, size=nil)
+    size ||= :thumb_small
     "<img alt=\"#{h(person.name)}\" class=\"avatar\" data-person_id=\"#{person.id}\" src=\"#{person.profile.image_url(size)}\" title=\"#{h(person.name)} (#{h(person.diaspora_handle)})\">".html_safe
   end
 
   def person_link(person, opts={})
     opts[:class] ||= ""
     opts[:class] << " self" if defined?(user_signed_in?) && user_signed_in? && current_user.person == person
-    "<a href='/people/#{person.id}' class='#{opts[:class]}'>
-  #{h(person.name)}
-</a>".html_safe
+    remote_or_hovercard_link = "/people/#{person.id}".html_safe
+    if person.local?
+          "<a data-hovercard='#{remote_or_hovercard_link}' href='/u/#{person.diaspora_handle.split('@')[0]}' class='#{opts[:class]}'>
+        #{h(person.name)}
+      </a>".html_safe
+    else
+          "<a href='#{remote_or_hovercard_link}' data-hovercard='#{remote_or_hovercard_link}' class='#{opts[:class]}' >
+        #{h(person.name)}
+      </a>".html_safe
+    end
   end
 
   def hard_link(string, path)
@@ -62,9 +70,15 @@ module ApplicationHelper
     if opts[:to] == :photos
       link_to person_image_tag(person, opts[:size]), person_photos_path(person)
     else
-      "<a href='/people/#{person.id}'>
-  #{person_image_tag(person)}
-</a>".html_safe
+      if person.local?
+        "<a href='/u/#{person.diaspora_handle.split('@')[0]}' class='#{opts[:class]}'>
+        #{person_image_tag(person, opts[:size])}
+        </a>".html_safe
+      else
+        "<a href='/people/#{person.id}'>
+        #{person_image_tag(person, opts[:size])}
+        </a>".html_safe
+      end
     end
   end
 
@@ -89,7 +103,7 @@ module ApplicationHelper
 
   def direction_for(string)
     return '' unless string.respond_to?(:cleaned_is_rtl?)
-    string.cleaned_is_rtl? ? 'rtl' : ''
+    string.cleaned_is_rtl? ? 'rtl' : 'ltr'
   end
 
   def rtl?
@@ -97,7 +111,11 @@ module ApplicationHelper
   end
 
   def controller_index_path
-    self.send((request.filtered_parameters["controller"] + "_path").to_sym)
+    kontroller = request.filtered_parameters["controller"]
+    if kontroller.downcase != "contacts"
+      kontroller = "aspects"
+    end
+    self.send((kontroller + "_path").to_sym)
   end
 
   def left_nav_root
@@ -106,5 +124,17 @@ module ApplicationHelper
     else
       t('aspects.index.your_aspects')
     end
+  end
+
+  def contacts_link
+    if current_user.contacts.size > 0
+      contacts_path
+    else
+      featured_users_path
+    end
+  end
+
+  def all_services_connected?
+    current_user.services.size == AppConfig[:configured_services].size
   end
 end

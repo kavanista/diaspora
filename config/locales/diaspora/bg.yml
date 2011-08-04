@@ -25,7 +25,11 @@ bg:
         request: 
           attributes: 
             from_id: 
-              taken: "is a duplicate of a pre-existing request."
+              taken: "е дубликат на вече съществуваща заявка."
+        reshare: 
+          attributes: 
+            root_guid: 
+              taken: "Вече сте споделили публикацията!"
         user: 
           attributes: 
             email: 
@@ -102,8 +106,11 @@ bg:
         content_1: "Вашият адрес в Diaspora е:"
         content_2: "Споделете го с който и да е и той ще ви намери в Diaspora."
         heading: "Адрес в Diaspora"
+      donate: "Дарете"
       handle_explanation: "Това е вашият адрес в Diaspora. Наподобява адрес на ел. поща - давате го на хора, за да се свържат с вас."
+      keep_us_running: "Помогнете за бързата и надеждна работа на %{pod} като осигурите на сървърите месечната им доза кафе!"
       no_contacts: "Няма контакти"
+      no_tags: "Няма тагове"
       people_sharing_with_you: "Хора споделящи с вас"
       post_a_message: "публикуване на съобщение >>"
       services: 
@@ -120,12 +127,17 @@ bg:
       create: "Създаване"
       name: "Име"
     no_posts_message: 
+      featured_users: "отличени потребители"
+      or_featured: "Или можете да споделите с %{link}"
       start_talking: "Няма публикации."
-      try_adding_some_more_contacts: "Пробвайте да добавите още контакти."
+      try_adding_some_more_contacts: "Можете да търсите (в кутията отгоре) или да поканите хора (отдясно)."
+      you_should_add_some_more_contacts: "You should add some more contacts!"
     one: "1 аспект"
     other: "%{count} аспекта"
     seed: 
+      acquaintances: "Познати"
       family: "Семейство"
+      friends: "Приятели"
       work: "Работа"
     selected_contacts: 
       manage_your_aspects: "Управление на аспектите."
@@ -160,6 +172,8 @@ bg:
   contacts: 
     create: 
       failure: "Контактът не бе създаден"
+    featured: 
+      featured_users: "Отличени потребители"
     few: "%{count} контакта"
     index: 
       add_a_new_aspect: "Създаване на аспект"
@@ -201,6 +215,7 @@ bg:
     new: 
       abandon_changes: "Отказвате се от промените?"
       send: "Изпращане"
+      sending: "Изпращане..."
       subject: "тема"
       to: "до"
     show: 
@@ -272,6 +287,7 @@ bg:
       login: "вписване"
       logout: "отписване"
       profile: "профил"
+      recent_notifications: "Скорошни известия"
       settings: "настройки"
       view_all: "Показване на всички"
   likes: 
@@ -288,7 +304,13 @@ bg:
         one: "харесана %{count} път"
         other: "харесана %{count} пъти"
         zero: "не е харесана"
-  limited: "Ограничено"
+      people_like_this_comment: 
+        few: "харесан %{count} пъти"
+        many: "харесан %{count} пъти"
+        one: "харесан %{count} път"
+        other: "харесан %{count} пъти"
+        zero: "не е харесан"
+  limited: "Ограничена"
   more: "Още"
   next: "следваща"
   no_results: "Няма намерени резултати"
@@ -366,39 +388,31 @@ bg:
       other: "%{actors} започна да споделя с вас."
       zero: "%{actors} започна да споделя с вас."
   notifier: 
-    also_commented: 
-      commented: "също коментира публикацията на %{post_author}:"
-      sign_in: "Впишете се, за да я прегледате."
-      subject: "%{name} коментира публикация на %{post_author}."
+    click_here: "кликнете тук"
     comment_on_post: 
-      commented: "добави коментар на ваша публикация:"
-      sign_in: "Впишете се, за да го прегледате."
-      subject: "%{name} коментира ваша публикация."
-    diaspora: "системата за ел. поща на Diaspora"
+      reply: "Отговорете или прегледайте публикацията на %{name} >"
+    confirm_email: 
+      click_link: "За да активирате новия адрес (%{unconfirmed_email}) кликнете върху следната връзка:"
+      subject: "Моля, акивирайте новия адрес на ел. ви поща (%{unconfirmed_email})"
+    email_sent_by_diaspora: "Ел. писмо е изпратено от Diaspora.  Ако вече не желаете да получавате подобни писма,"
     hello: "Здравейте %{name}!"
     liked: 
-      liked: "току-що %{name} хареса вашата публикация:"
-      sign_in: "Впишете се, за да я прегледате"
-      subject: "току-що %{name} хареса ваша публикация"
-    love: "с уважение,"
-    manage_your_email_settings: "променяне на настройките за известяване"
+      liked: "току-що %{name} хареса вашата публикация"
+      view_post: "Преглед на публикацията >"
     mentioned: 
       mentioned: "ви спомена в публикация:"
-      sign_in: "Впишете се, за да я прегледате."
       subject: "%{name} ви спомена в Diaspora*"
     private_message: 
-      message_subject: "Тема: %{subject}"
-      private_message: "ви изпрати лично съобщение:"
-      sign_in: "Впишете се, за да го прегледате."
-      subject: "%{name} ви изпрати лично съобщение в Diaspora*"
+      reply_to_or_view: "Отговорете или прегледайте разговора >"
     single_admin: 
       admin: "Вашият администратор на Diaspora"
       subject: "Съобщение относно акаунта ви в Diaspora:"
     started_sharing: 
       sharing: "започна да споделя с вас!"
-      sign_in: "Впишете се тук"
       subject: "%{name} започна да споделя с вас в Diaspora*"
+      view_profile: "Прегледайте профила на %{name}"
     thanks: "Благодаря,"
+    to_change_your_notification_settings: "за да промените насройките за известяване"
   ok: "Добре"
   or: "или"
   password: "Парола"
@@ -438,10 +452,10 @@ bg:
       add_some: "добавяне"
       does_not_exist: "Лицето не съществува!"
       edit: "редактиране"
+      has_not_shared_with_you_yet: "%{name} has not shared any posts with you yet!"
       incoming_request: "%{name} желае да споделя с вас"
       mention: "Споменете"
       message: "Съобщение"
-      no_posts: "няма публикации за изобразяване!"
       not_connected: "Вие не споделяте с лицето"
       recent_posts: "Скорошни публикации"
       recent_public_posts: "Скорошни публични публикации"
@@ -512,12 +526,12 @@ bg:
       your_photo: "Снимка"
       your_private_profile: "Вашият личен профил"
       your_public_profile: "Вашият публичен профил"
-      your_tags: "Опишете се с до 5 #думи"
+      your_tags: "Опишете се с до 5 #думи (тагове)"
       your_tags_placeholder: "например: #България #diaspora #фитнес #музика #котки"
     update: 
       failed: "Профилът не бе обновен"
       updated: "Профилът е обновен"
-  public: "Публично"
+  public: "Публична"
   registrations: 
     closed: "Signups are closed on this Diaspora pod."
     create: 
@@ -556,6 +570,20 @@ bg:
       manage_within: "Manage contacts within"
     new_request_to_person: 
       sent: "изпратена!"
+  reshares: 
+    create: 
+      failure: "Възникна грешка при споделянето на публикацията."
+    reshare: 
+      deleted: "Оригиналната публикация е изтрита от автора."
+      reshare: 
+        few: "%{count} споделяния"
+        many: "%{count} споделяния"
+        one: "1 споделяне"
+        other: "%{count} споделяния"
+        zero: "Споделяне"
+      reshare_confirmation: "Споделяне публикацията на %{author}?"
+      reshare_original: "Споделяне на оригинала"
+      show_original: "Оригиналът"
   search: "Търсене"
   services: 
     create: 
@@ -690,10 +718,14 @@ bg:
   undo: "Отмяна?"
   username: "Потребителско име"
   users: 
+    confirm_email: 
+      email_confirmed: "Ел. поща %{email} е активирана"
+      email_not_confirmed: "Ел. поща не може да бъде активирана. Грешна връзка?"
     destroy: "Акаунтът ви в Diaspora е заключен. Затварянето може да отнеме до 20 минути. Благодарим ви, че пробвахте Diaspora."
     edit: 
       also_commented: "...някой коментира публикация на ваш контакт?"
       change: "Промяна"
+      change_email: "Промяна на ел. поща"
       change_language: "Промяна на езика"
       change_password: "Промяна на паролата"
       close_account: "Затваряне на акаунта"
@@ -702,6 +734,7 @@ bg:
       download_photos: "снимките ви"
       download_xml: "данните ви (XML формат)"
       edit_account: "Редактиране на акаунта"
+      email_awaiting_confirmation: "Изпратена е връзка за активиране до %{unconfirmed_email}. Докато не я активирате ще бъде ползвана старата ел. поща (%{email})."
       export_data: "Сваляне на..."
       liked: "...някой хареса ваша публикация?"
       mentioned: "...бъдете споменат в публикация?"
@@ -732,9 +765,11 @@ bg:
     update: 
       email_notifications_changed: "Адресът за известяване е променен"
       language_changed: "Езикът е сменен"
-      language_not_changed: "Езикът не бе променен"
+      language_not_changed: "Езикът не бе сменен"
       password_changed: "Паролата е променена. Можете да се впишете с новата парола."
       password_not_changed: "Паролата не бе променена"
+      unconfirmed_email_changed: "Ел. поща е променена. Необходимо е да я активирате."
+      unconfirmed_email_not_changed: "Ел. поща не бе променена"
   webfinger: 
     fetch_failed: "failed to fetch webfinger profile for %{profile_url}"
     hcard_fetch_failed: "there was a problem fetching the hcard for %{account}"

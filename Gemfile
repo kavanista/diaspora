@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'mysql2', '0.2.6'
 #gem 'pg'
 #gem 'sqlite3'
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.9'
 gem 'foreigner', '0.9.1'
 gem 'activerecord-import'
 
@@ -32,7 +32,8 @@ gem 'faraday'
 gem 'faraday-stack'
 
 #Views
-gem 'haml', '3.0.25'
+gem 'haml', '3.1.2'
+gem 'sass', '3.1.4'
 gem 'will_paginate', '3.0.pre2'
 
 #Localization
@@ -84,7 +85,9 @@ group :development do
 end
 
 group :test, :development do
-  gem 'factory_girl_rails', :require => false
+  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i  
+  #gem 'guard-rspec' 
+   gem 'factory_girl_rails', :require => false
   unless ENV["TRAVIS"]
     gem 'ruby-debug-base19', '0.11.23' if RUBY_VERSION.include? '1.9.1'
     gem 'ruby-debug19', :platforms => :ruby_19

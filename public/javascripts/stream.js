@@ -18,8 +18,13 @@ var Stream = {
     Stream.setUpAudioLinks();
     //Stream.setUpImageLinks();
 
+    Diaspora.widgets.subscribe("stream/scrolled", Stream.collapseText);
+    Stream.collapseText('eventID', Stream.selector);
+  },
+  collapseText: function(){
+    elements = $(Array.prototype.slice.call(arguments,1));
     // collapse long posts
-    $(".content p", this.selector).expander({
+    $(".content p", elements).expander({
       slicePoint: 400,
       widow: 12,
       expandText: Diaspora.I18n.t("show_more"),
@@ -27,7 +32,7 @@ var Stream = {
     });
 
     // collapse long comments
-    $(".comment .content span", this.selector).expander({
+    $(".comment .content span", elements).expander({
       slicePoint: 200,
       widow: 400,
       expandText: Diaspora.I18n.t("show_more"),

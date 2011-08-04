@@ -17,33 +17,36 @@
       },
       bufferPx: 500,
       debug: false,
-      donetext: Diaspora.I18n.t("infinite_scroll.no_more"),
+      donetext: Diaspora.widgets.i18n.t("infinite_scroll.no_more"),
       loadingText: "",
       loadingImg: '/images/ajax-loader.gif'
     };
 
     this.subscribe("widget/ready", function() {
-      self.globalSubscribe("stream/reloaded", self.reInitialize, this);
+      Diaspora.widgets.subscribe("stream/reloaded", self.reInitialize, this);
       self.initialize();
     });
 
     this.reInitialize = function() {
       self.clear();
-      self.initialize();  
+      self.initialize();
     };
 
     this.initialize = function() {
       if($('#main_stream').length !== 0){
-				$('#main_stream').infinitescroll(this.options, function() {
-	  			self.globalPublish("stream/scrolled");
-				});
-      } else if($('#people_stream.contacts').length !== 0){
-				$("#people_stream.contacts").infinitescroll($.extend(self.options, {
-	  			navSelector  : ".pagination",
-	  			nextSelector : ".next_page"
-				}), function() {
-	  			self.globalPublish("stream/scrolled");
-				});
+        $('#main_stream').infinitescroll(this.options, function(new_elements) {
+          Diaspora.widgets.publish("stream/scrolled", new_elements);
+        });
+      } else if($('#people_stream').length !== 0){
+        $("#people_stream").infinitescroll($.extend(self.options, {
+          navSelector  : ".pagination",
+          nextSelector : ".next_page",
+          pathParse : function( pathStr, nextPage){
+            return pathStr.replace("page=2", "page=" + nextPage);
+          }
+        }), function(new_elements) {
+          Diaspora.widgets.publish("stream/scrolled", new_elements);
+        });
       }
     };
 
@@ -52,6 +55,6 @@
     };
   };
 
-  Diaspora.Widgets.add("InfiniteScroll", InfiniteScroll);
+  Diaspora.widgets.add("infinitescroll", InfiniteScroll);
 })();
 

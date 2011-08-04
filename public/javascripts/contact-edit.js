@@ -52,7 +52,7 @@ var ContactEdit = {
       ContactEdit.toggleCheckbox(checkbox);
       ContactEdit.updateNumber(li.closest(".dropdown_list"), li.parent().data("person_id"), aspectMembership.aspect_ids.length);
 
-      Diaspora.Page.publish("aspectDropdown/updated", [li.parent().data("person_id"), li.parents(".dropdown").get(0).outerHTML]);
+      Diaspora.Page.publish("aspectDropdown/updated", [li.parent().data("person_id"), li.parents(".dropdown").parent(".right").html()]);
     });
   },
 };

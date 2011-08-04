@@ -22,9 +22,9 @@ class UsersController < ApplicationController
 
   def update
     password_changed = false
-    if u = params[:user]
-      @user = current_user
+    @user = current_user
 
+    if u = params[:user]
       u.delete(:password) if u[:password].blank?
       u.delete(:password_confirmation) if u[:password].blank? and u[:password_confirmation].blank?
       u.delete(:language) if u[:language].blank?
@@ -48,7 +48,17 @@ class UsersController < ApplicationController
         else
           flash[:error] = I18n.t 'users.update.language_not_changed'
         end
+      elsif u[:email]
+        @user.unconfirmed_email = u[:email]
+        if @user.save
+          @user.mail_confirm_email
+          flash[:notice] = I18n.t 'users.update.unconfirmed_email_changed'
+        else
+          flash[:error] = I18n.t 'users.update.unconfirmed_email_not_changed'
+        end
       end
+    elsif aspect_order = params[:reorder_aspects]
+      @user.reorder_aspects(aspect_order)
     end
 
     respond_to do |format|
@@ -88,27 +98,9 @@ class UsersController < ApplicationController
     @person   = @user.person
     @profile  = @user.profile
     @services = @user.services
-    service = current_user.services.where(:type => "Services::Facebook").first
+    @step     = 0
 
-    @step = ((params[:step].to_i>0)&&(params[:step].to_i<4)) ? params[:step].to_i : 1
-    @step ||= 1
-
-    if @step == 2 && SERVICES['facebook']['app_id'] == ""
-      @step = 3
-    end
-
-    if @step == 3
-      @friends = service ? service.finder(:local => true) : []
-      @friends ||= []
-    end
-
-    if @step == 3 && @friends.length == 0
-      @user.update_attributes(:getting_started => false)
-      flash[:notice] = I18n.t('users.getting_started.could_not_find_anyone')
-      redirect_to root_path
-    else
-      render "users/getting_started"
-    end
+    render "users/getting_started"
   end
 
   def getting_started_completed
@@ -125,5 +117,14 @@ class UsersController < ApplicationController
   def export_photos
     tar_path = PhotoMover::move_photos(current_user)
     send_data( File.open(tar_path).read, :filename => "#{current_user.id}.tar" )
+  end
+
+  def confirm_email
+    if current_user.confirm_email(params[:token])
+      flash[:notice] = I18n.t('users.confirm_email.email_confirmed', :email => current_user.email)
+    elsif current_user.unconfirmed_email.present?
+      flash[:error] = I18n.t('users.confirm_email.email_not_confirmed')
+    end
+    redirect_to edit_user_path
   end
 end

@@ -26,6 +26,10 @@ pl:
           attributes: 
             from_id: 
               taken: "is a duplicate of a pre-existing request."
+        reshare: 
+          attributes: 
+            root_guid: 
+              taken: "You've already reshared that post!"
         user: 
           attributes: 
             email: 
@@ -102,8 +106,11 @@ pl:
         content_1: "Your Diaspora ID is:"
         content_2: "Give it to anyone and they'll be able to find you on Diaspora."
         heading: "Diaspora ID"
+      donate: "Donate"
       handle_explanation: "To jest Twój identyfikator w Diasporze. Podobnie jak adresu e-mailowy, możesz podawać go innym, aby mogli się z Tobą skontaktować."
+      keep_us_running: "Keep %{pod} running fast, buy our servers their monthly coffee fix!"
       no_contacts: "Brak kontaktów"
+      no_tags: "No tags"
       people_sharing_with_you: "Osoby dzielące się z tobą"
       post_a_message: "napisz wiadomość >>"
       services: 
@@ -120,12 +127,17 @@ pl:
       create: "Stwórz"
       name: "Nazwa"
     no_posts_message: 
+      featured_users: "featured users"
+      or_featured: "Or you can share with %{link}"
       start_talking: "Nikt jeszcze nic nie powiedział. Rozkręć rozmowę!"
       try_adding_some_more_contacts: "Try adding some more contacts."
+      you_should_add_some_more_contacts: "You should add some more contacts!"
     one: "1 aspekt"
     other: "%{count} aspektów"
     seed: 
+      acquaintances: "Acquaintances"
       family: "Rodzina"
+      friends: "Friends"
       work: "Praca"
     selected_contacts: 
       manage_your_aspects: "Manage your aspects."
@@ -160,6 +172,8 @@ pl:
   contacts: 
     create: 
       failure: "Nie udało się utworzyć kontaktu"
+    featured: 
+      featured_users: "Featured Users"
     few: "%{count} kontakty"
     index: 
       add_a_new_aspect: "Add a new aspect"
@@ -201,6 +215,7 @@ pl:
     new: 
       abandon_changes: "Abandon changes?"
       send: "Wyślij"
+      sending: "Sending..."
       subject: "temat"
       to: "do"
     show: 
@@ -272,6 +287,7 @@ pl:
       login: "logowanie"
       logout: "wyloguj"
       profile: "profil"
+      recent_notifications: "Recent notifications"
       settings: "ustawienia"
       view_all: "View all"
   likes: 
@@ -288,6 +304,12 @@ pl:
         one: "1 osoba to polubiła"
         other: "%{count} osób polubiło to"
         zero: "nikt tego nie polubił"
+      people_like_this_comment: 
+        few: "%{count} likes"
+        many: "%{count} likes"
+        one: "%{count} like"
+        other: "%{count} likes"
+        zero: "no likes"
   limited: "Limited"
   more: "Więcej"
   next: "następny"
@@ -366,39 +388,31 @@ pl:
       other: "%{actors} started sharing with you."
       zero: "%{actors} started sharing with you."
   notifier: 
-    also_commented: 
-      commented: "skomentował też wpis użytkownika %{post_author}:"
-      sign_in: "Zaloguj się, aby je obejrzeć."
-      subject: "%{name} skomentował również wpis użytkownika %{post_author}."
+    click_here: "click here"
     comment_on_post: 
-      commented: "skomentował twój wpis:"
-      sign_in: "Zaloguj się, aby go obejrzeć."
-      subject: "Użytkownik %{name} skomentował Twój wpis."
-    diaspora: "robot e-mailowy diaspory"
+      reply: "Reply or view %{name}'s post >"
+    confirm_email: 
+      click_link: "To activate your new e-mail address %{unconfirmed_email}, please click this link:"
+      subject: "Please activate your new e-mail address %{unconfirmed_email}"
+    email_sent_by_diaspora: "This email was sent by Diaspora.  If you'd like to stop getting emails like this,"
     hello: "Cześć %{name}!"
     liked: 
       liked: "użytkownik %{name} polubił twój post: "
-      sign_in: "Zaloguj się, aby zobaczyć"
-      subject: "użytkownik %{name} polubił twój wpis"
-    love: "uściski,"
-    manage_your_email_settings: "zarządzaj ustawieniami emaila"
+      view_post: "View post >"
     mentioned: 
       mentioned: "wspomniał(a) o tobie we wpisie:"
-      sign_in: "Zaloguj się, aby uzyskać dostęp."
       subject: "%{name} wspomniał o tobie w serwisie Diaspora*"
     private_message: 
-      message_subject: "Temat: %{subject}"
-      private_message: "wysłał ci wiadomość prywatną:"
-      sign_in: "Zarejestruj się, aby zobaczyć."
-      subject: "%{name} wysłał ci prywatną wiadomość w serwisie Diaspora*"
+      reply_to_or_view: "Reply to or view this conversation >"
     single_admin: 
       admin: "Twój panel zarządzania Diaspora"
       subject: "Wiadomość od twojego panelu zarządzania Diaspora:"
     started_sharing: 
       sharing: "zaczął dzielić się z tobą!"
-      sign_in: "Zaloguj się"
       subject: "%{name} zaczął dzielić się z tobą na Diasporze*"
+      view_profile: "View %{name}'s profile"
     thanks: "Dzięki,"
+    to_change_your_notification_settings: "to change your notification settings"
   ok: "OK"
   or: "lub"
   password: "Hasło"
@@ -438,10 +452,10 @@ pl:
       add_some: "dodaj kogoś"
       does_not_exist: "Osoba nie istnieje!"
       edit: "edytuj"
+      has_not_shared_with_you_yet: "%{name} has not shared any posts with you yet!"
       incoming_request: "%{name} chce być twoim znajomym"
       mention: "Wspomnij"
       message: "Wiadomość"
-      no_posts: "brak wpisów!"
       not_connected: "Ta osoba nie jest twoim znajomym"
       recent_posts: "Ostatnie wpisy"
       recent_public_posts: "Ostatnie wpisy publiczne"
@@ -556,6 +570,20 @@ pl:
       manage_within: "Zarządzanie kontaktami w"
     new_request_to_person: 
       sent: "wysłano!"
+  reshares: 
+    create: 
+      failure: "There was an error resharing this post."
+    reshare: 
+      deleted: "Original post deleted by author."
+      reshare: 
+        few: "%{count} Reshares"
+        many: "%{count} Reshares"
+        one: "1 Reshare"
+        other: "%{count} Reshares"
+        zero: "Reshare"
+      reshare_confirmation: "Reshare %{author} - %{text}?"
+      reshare_original: "Reshare orignial"
+      show_original: "Show Original"
   search: "Szukaj"
   services: 
     create: 
@@ -690,10 +718,14 @@ pl:
   undo: "Cofnąć?"
   username: "Nazwa użytkownika"
   users: 
+    confirm_email: 
+      email_confirmed: "E-Mail %{email} activated"
+      email_not_confirmed: "E-Mail could not be activated. Wrong link?"
     destroy: "Konto zostało pomyślnie zamknięte."
     edit: 
       also_commented: "...ktoś także skomentuje wpis jednego z twoich kontaktów?"
       change: "Zmień"
+      change_email: "Change E-Mail"
       change_language: "Zmień język"
       change_password: "Zmiana hasła"
       close_account: "Zamknij konto"
@@ -702,6 +734,7 @@ pl:
       download_photos: "pobierz moje zdjęcia"
       download_xml: "pobierz mój xml"
       edit_account: "Edytuj konto"
+      email_awaiting_confirmation: "We have sent you an activation link to %{unconfirmed_email}. Till you follow this link and activate the new address, we will continue to use your original address %{email}."
       export_data: "Eksportowanie danych"
       liked: "...ktoś polubił twój wpis?"
       mentioned: "...zostałeś wspomniany(a) we wpisie?"
@@ -735,6 +768,8 @@ pl:
       language_not_changed: "Nie udało się zmienić języka"
       password_changed: "Zmieniono hasło"
       password_not_changed: "Nie udało się zmienić hasła"
+      unconfirmed_email_changed: "E-Mail Changed. Needs activation."
+      unconfirmed_email_not_changed: "E-Mail Change Failed"
   webfinger: 
     fetch_failed: "Nie udało się pobrać profilu Webfinger dla %{profile_url}"
     hcard_fetch_failed: "Wystąpił problem podczas pobierania wizytówki hcard użytkownika %{account}"

@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   validates_format_of :username, :with => /\A[A-Za-z0-9_]+\z/
   validates_length_of :username, :maximum => 32
   validates_inclusion_of :language, :in => AVAILABLE_LANGUAGE_CODES
+  validates_format_of :unconfirmed_email, :with  => Devise.email_regexp, :allow_blank => true
 
   validates_presence_of :person, :unless => proc {|user| user.invitation_token.present?}
   validates_associated :person
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
 
   has_many :invitations_from_me, :class_name => 'Invitation', :foreign_key => :sender_id, :dependent => :destroy
   has_many :invitations_to_me, :class_name => 'Invitation', :foreign_key => :recipient_id, :dependent => :destroy
-  has_many :aspects
+  has_many :aspects, :order => 'order_id ASC'
   has_many :aspect_memberships, :through => :aspects
   has_many :contacts
   has_many :contact_people, :through => :contacts, :source => :person
@@ -48,6 +49,7 @@ class User < ActiveRecord::Base
   before_save do
     person.save if person && person.changed?
   end
+  before_save :guard_unconfirmed_email
 
   attr_accessible :getting_started, :password, :password_confirmation, :language, :disable_mail
 
@@ -101,6 +103,12 @@ class User < ActiveRecord::Base
     true
   end
 
+  def confirm_email(token)
+    return false if token.blank? || token != confirm_email_token
+    self.email = unconfirmed_email
+    save
+  end
+
   ######### Aspects ######################
 
   def move_contact(person, to_aspect, from_aspect)
@@ -128,7 +136,8 @@ class User < ActiveRecord::Base
   end
 
   def dispatch_post(post, opts = {})
-    mailman = Postzord::Dispatch.new(self, post)
+    additional_people = opts.delete(:additional_subscribers)
+    mailman = Postzord::Dispatch.new(self, post, :additional_subscribers => additional_people)
     mailman.post(opts)
   end
 
@@ -181,7 +190,7 @@ class User < ActiveRecord::Base
     build_relayable(Like, options)
   end
 
-  # Check whether the user has liked a post.  Extremely inefficient if the post's likes are not loaded.
+  # Check whether the user has liked a post.
   # @param [Post] post
   def liked?(target)
     if target.likes.loaded?
@@ -195,7 +204,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Get the user's like of a post, if there is one.  Extremely inefficient if the post's likes are not loaded.
+  # Get the user's like of a post, if there is one.
   # @param [Post] post
   # @return [Like]
   def like_for(target)
@@ -214,15 +223,27 @@ class User < ActiveRecord::Base
     end
   end
 
+  def mail_confirm_email
+    return false if unconfirmed_email.blank?
+    Resque.enqueue(Job::MailConfirmEmail, id)
+    true
+  end
+
   ######### Posts and Such ###############
-  def retract(target)
+  def retract(target, opts={})
     if target.respond_to?(:relayable?) && target.relayable?
       retraction = RelayableRetraction.build(self, target)
+    elsif target.is_a? Post
+      retraction = SignedRetraction.build(self, target)
     else
       retraction = Retraction.for(target)
     end
 
-    mailman = Postzord::Dispatch.new(self, retraction)
+   if target.is_a?(Post)
+     opts[:additional_subscribers] = target.resharers
+   end
+
+    mailman = Postzord::Dispatch.new(self, retraction, opts)
     mailman.post
 
     retraction.perform(self)
@@ -312,7 +333,7 @@ class User < ActiveRecord::Base
     end
 
     self.person = Person.new(opts[:person])
-    self.person.diaspora_handle = "#{opts[:username]}@#{AppConfig[:pod_uri].host}"
+    self.person.diaspora_handle = "#{opts[:username]}@#{AppConfig[:pod_uri].authority}"
     self.person.url = AppConfig[:pod_url]
 
 
@@ -324,12 +345,18 @@ class User < ActiveRecord::Base
 
   def seed_aspects
     self.aspects.create(:name => I18n.t('aspects.seed.family'))
+    self.aspects.create(:name => I18n.t('aspects.seed.friends'))
     self.aspects.create(:name => I18n.t('aspects.seed.work'))
+    aq = self.aspects.create(:name => I18n.t('aspects.seed.acquaintances'))
+
+    default_account = Webfinger.new('diasporahq@joindiaspora.com').fetch
+    self.share_with(default_account, aq) if default_account
+    aq
   end
 
   def self.generate_key
     key_size = (Rails.env == 'test' ? 512 : 4096)
-    OpenSSL::PKey::RSA::generate key_size
+    OpenSSL::PKey::RSA::generate(key_size)
   end
 
   def encryption_key
@@ -364,5 +391,21 @@ class User < ActiveRecord::Base
 
   def remove_mentions
     Mention.where( :person_id => self.person.id).delete_all
+  end
+
+  def guard_unconfirmed_email
+    self.unconfirmed_email = nil if unconfirmed_email.blank? || unconfirmed_email == email
+
+    if unconfirmed_email_changed?
+      self.confirm_email_token = unconfirmed_email ? ActiveSupport::SecureRandom.hex(15) : nil
+    end
+  end
+
+  def reorder_aspects(aspect_order)
+    i = 0
+    aspect_order.each do |id|
+      self.aspects.find(id).update_attributes({ :order_id => i })
+      i += 1
+    end
   end
 end

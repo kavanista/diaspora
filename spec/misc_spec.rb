@@ -61,5 +61,4 @@ describe 'making sure the spec runner works' do
       alice.comment "yo", :post => person_status
     end
   end
-
 end

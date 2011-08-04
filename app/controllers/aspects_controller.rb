@@ -18,16 +18,9 @@ class AspectsController < ApplicationController
       @aspects = current_user.aspects.where(:id => params[:a_ids])
     else
       @aspects = current_user.aspects
-      @contacts_sharing_with = current_user.contacts.sharing.includes(:person => :profile)
     end
 
     aspect_ids = @aspects.map{|a| a.id}
-
-    # redirect to signup
-    if current_user.getting_started == true && !request.format.mobile? && !request.format.js?
-      redirect_to getting_started_path
-      return
-    end
 
     # redirect to aspects creation
     if @aspects.blank?
@@ -39,17 +32,16 @@ class AspectsController < ApplicationController
       all_selected_people = Person.joins(:contacts => :aspect_memberships).
         where(:contacts => {:user_id => current_user.id},
               :aspect_memberships => {:aspect_id => aspect_ids})
-      @selected_people = all_selected_people.select("DISTINCT people.*").limit(20).includes(:profile)
+      @selected_people = all_selected_people.select("DISTINCT people.*").order('RAND()').limit(20).includes(:profile)
     end
 
     @aspect_ids = @aspects.map { |a| a.id }
-    posts = current_user.visible_posts(:by_members_of => @aspect_ids,
-                                           :type => ['StatusMessage','ActivityStreams::Photo'],
+    @posts = current_user.visible_posts(:by_members_of => @aspect_ids,
+                                           :type => ['StatusMessage','Reshare', 'ActivityStreams::Photo'],
                                            :order => session[:sort_order] + ' DESC',
                                            :max_time => params[:max_time].to_i
-                          ).includes(:mentions => {:person => :profile})
+                          ).includes(:mentions => {:person => :profile}, :author => :profile)
 
-    @posts = PostsFake.new(posts)
     if params[:only_posts]
       render :partial => 'shared/stream', :locals => {:posts => @posts}
     else

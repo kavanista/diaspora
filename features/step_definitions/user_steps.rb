@@ -111,13 +111,6 @@ Then /^I should have (\d) contacts? in "([^"]*)"$/ do |n_contacts, aspect_name|
   @me.aspects.where(:name => aspect_name).first.contacts.count.should == n_contacts.to_i
 end
 
-Given /^I have (\d) contacts?$/ do |count|
-  count.to_i.times do
-    u = Factory(:user_with_aspect)
-    u.share_with(@me.person, u.aspects.first)
-  end
-end
-
 When /^I (add|remove|toggle) the person (to|from) my ([\d])(nd|rd|st|th) aspect$/ do |word1, word2, aspect_number, nd|
   steps %Q{
     And I press the first ".toggle.button"
@@ -144,10 +137,13 @@ When /^I post a status with the text "([^\"]*)"$/ do |text|
 end
 
 
-And /^I follow the "([^\"]*)" link from the Devise.mailer$/ do |link_text|
-  doc = Nokogiri(Devise.mailer.deliveries.first.body.to_s)
+And /^I follow the "([^\"]*)" link from the last sent email$/ do |link_text|
+  email_text = Devise.mailer.deliveries.first.body.to_s
+  email_text = Devise.mailer.deliveries.first.html_part.body.raw_source if email_text.blank?
+  doc = Nokogiri(email_text)
   links = doc.css('a')
   link = links.detect{ |link| link.text == link_text }
+  link = links.detect{ |link| link.attributes["href"].value.include?(link_text)} unless link
   path = link.attributes["href"].value
   visit URI::parse(path).request_uri
 end
@@ -159,4 +155,33 @@ When /^"([^\"]+)" has posted a status message with a photo$/ do |email|
     user.add_to_streams(p, user.aspects)
     user.dispatch_post(p)
   end
+end
+
+Then /^my "([^\"]*)" should be "([^\"]*)"$/ do |field, value|
+  @me.reload.send(field).should == value
+end
+
+Given /^I have (\d+) contacts$/ do |n|
+  count = n.to_i - @me.contacts.count
+
+  people = []
+  contacts = []
+  aspect_memberships = []
+
+  count.times do
+    person = Factory.create(:person)
+    people << person
+  end
+
+  people.each do |person|
+    contacts << Contact.new(:person_id => person.id, :user_id => @me.id, :sharing => true, :receiving => true)
+  end
+  Contact.import(contacts)
+  contacts = @me.contacts.limit(n.to_i)
+
+  aspect_id = @me.aspects.first.id
+  contacts.each do |contact|
+    aspect_memberships << AspectMembership.new(:contact_id => contact.id, :aspect_id => @me.aspects.first.id)
+  end
+  AspectMembership.import(aspect_memberships)
 end

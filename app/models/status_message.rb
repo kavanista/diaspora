@@ -21,7 +21,6 @@ class StatusMessage < Post
   validate :message_or_photos_present?
 
   attr_accessible :text
-
   serialize :youtube_titles, Hash
 
   after_create :create_mentions
@@ -47,7 +46,7 @@ class StatusMessage < Post
 
   def format_mentions(text, opts = {})
     regex = /@\{([^;]+); ([^\}]+)\}/
-    form_message = text.gsub(regex) do |matched_string|
+    form_message = text.to_str.gsub(regex) do |matched_string|
       people = self.mentioned_people
       person = people.detect{ |p|
         p.diaspora_handle == $~[2] unless p.nil?
@@ -118,6 +117,18 @@ class StatusMessage < Post
       opts.merge!(:aspect_ids => aspect_ids)
     end
     super(user_or_id, opts)
+  end
+
+  def after_dispatch sender
+    unless self.photos.empty?
+      self.photos.update_all(:pending => false, :public => self.public)
+      for photo in self.photos
+        if photo.pending
+          sender.add_to_streams(photo, self.aspects)
+          sender.dispatch_post(photo)
+        end
+      end
+    end
   end
 
   protected

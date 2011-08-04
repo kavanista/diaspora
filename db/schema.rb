@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707234802) do
+ActiveRecord::Schema.define(:version => 20110730173443) do
 
   create_table "aspect_memberships", :force => true do |t|
     t.integer  "aspect_id",  :null => false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20110707234802) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "contacts_visible", :default => true, :null => false
+    t.integer  "order_id"
   end
 
   add_index "aspects", ["user_id", "contacts_visible"], :name => "index_aspects_on_user_id_and_contacts_visible"
@@ -232,6 +233,22 @@ ActiveRecord::Schema.define(:version => 20110707234802) do
   add_index "people", ["guid"], :name => "index_people_on_guid", :unique => true
   add_index "people", ["owner_id"], :name => "index_people_on_owner_id", :unique => true
 
+  create_table "pod_stats", :force => true do |t|
+    t.integer  "error_code"
+    t.integer  "person_id"
+    t.text     "error_message"
+    t.integer  "pod_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pods", :force => true do |t|
+    t.string   "host"
+    t.boolean  "ssl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "post_visibilities", :force => true do |t|
     t.integer  "post_id",                       :null => false
     t.datetime "created_at"
@@ -268,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20110707234802) do
     t.string   "provider_display_name"
     t.string   "actor_url"
     t.integer  "objectId"
+    t.string   "root_guid",             :limit => 30
     t.string   "status_message_guid"
     t.integer  "likes_count",                         :default => 0
   end
@@ -293,11 +311,11 @@ ActiveRecord::Schema.define(:version => 20110707234802) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "location"
+    t.string   "full_name",        :limit => 70
   end
 
-  add_index "profiles", ["first_name", "last_name", "searchable"], :name => "index_profiles_on_first_name_and_last_name_and_searchable"
-  add_index "profiles", ["first_name", "searchable"], :name => "index_profiles_on_first_name_and_searchable"
-  add_index "profiles", ["last_name", "searchable"], :name => "index_profiles_on_last_name_and_searchable"
+  add_index "profiles", ["full_name", "searchable"], :name => "index_profiles_on_full_name_and_searchable"
+  add_index "profiles", ["full_name"], :name => "index_profiles_on_full_name"
   add_index "profiles", ["person_id"], :name => "index_profiles_on_person_id"
 
   create_table "service_users", :force => true do |t|
@@ -391,6 +409,8 @@ ActiveRecord::Schema.define(:version => 20110707234802) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.string   "authentication_token",   :limit => 30
+    t.string   "unconfirmed_email"
+    t.string   "confirm_email_token",    :limit => 30
     t.datetime "locked_at"
   end
 

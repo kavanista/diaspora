@@ -65,17 +65,24 @@ describe PhotosController do
     end
 
     context "private photo user can see" do
-      before do
-        get :show, :id => @bobs_photo.id
-      end
-
       it "succeeds" do
+        get :show, :id => @bobs_photo.id
         response.should be_success
       end
 
       it "assigns the photo" do
+        get :show, :id => @bobs_photo.id
         assigns[:photo].should == @bobs_photo
         @controller.ownership.should be_false
+      end
+
+      it 'succeeds with a like present' do
+        sm = bob.post(:status_message, :text => 'parent post', :to => 'all')
+        @bobs_photo.status_message_guid = sm.guid
+        @bobs_photo.save!
+        alice.like(1, :target => @bobs_photo.status_message)
+        get :show, :id => @bobs_photo.id
+        response.should be_success
       end
     end
 
@@ -135,6 +142,12 @@ describe PhotosController do
       Photo.find_by_id(@alices_photo.id).should be_nil
     end
 
+    it 'will let you delete your profile picture' do
+      get :make_profile_photo, :photo_id => @alices_photo.id
+      delete :destroy, :id => @alices_photo.id
+      Photo.find_by_id(@alices_photo.id).should be_nil
+    end
+
     it 'sends a retraction on delete' do
       alice.should_receive(:retract).with(@alices_photo)
       delete :destroy, :id => @alices_photo.id
@@ -145,7 +158,7 @@ describe PhotosController do
       Photo.find_by_id(@bobs_photo.id).should be_true
     end
 
-    it 'will not let you destory posts you do not own' do
+    it 'will not let you destroy posts you do not own' do
       eves_photo = eve.post(:photo, :user_file => uploaded_photo, :to => eve.aspects.first.id, :public => true)
       delete :destroy, :id => eves_photo.id
       Photo.find_by_id(eves_photo.id).should be_true
@@ -221,7 +234,7 @@ describe PhotosController do
       end
     end
 
-    describe '.additonal_photos' do
+    describe '.additional_photos' do
       it 'finds all of a parent status messages photos' do
         sm = alice.post(:status_message, :text => 'yes', :to => alice.aspects.first)
         @alices_photo.status_message = sm

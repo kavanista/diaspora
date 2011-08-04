@@ -26,6 +26,10 @@ sl:
           attributes: 
             from_id: 
               taken: "is a duplicate of a pre-existing request."
+        reshare: 
+          attributes: 
+            root_guid: 
+              taken: "You've already reshared that post!"
         user: 
           attributes: 
             email: 
@@ -102,8 +106,11 @@ sl:
         content_1: "Your Diaspora ID is:"
         content_2: "Give it to anyone and they'll be able to find you on Diaspora."
         heading: "Diaspora ID"
+      donate: "Donate"
       handle_explanation: "To je vaš diaspora naslov. Tako kot vaš e-naslov, ga lahko uporabite kot naslov s pomočjo katerega drugi stopijo v stik z vami."
+      keep_us_running: "Keep %{pod} running fast, buy our servers their monthly coffee fix!"
       no_contacts: "Ni kontaktov"
+      no_tags: "No tags"
       people_sharing_with_you: "People sharing with you"
       post_a_message: "post a message >>"
       services: 
@@ -120,12 +127,17 @@ sl:
       create: "Create"
       name: "Name"
     no_posts_message: 
+      featured_users: "featured users"
+      or_featured: "Or you can share with %{link}"
       start_talking: "Trenutno še brez objav. Začnite s prvo objavo!"
       try_adding_some_more_contacts: "Try adding some more contacts."
+      you_should_add_some_more_contacts: "You should add some more contacts!"
     one: "1 aspect"
     other: "%{count} aspects"
     seed: 
+      acquaintances: "Acquaintances"
       family: "Družina"
+      friends: "Friends"
       work: "Služba"
     selected_contacts: 
       manage_your_aspects: "Manage your aspects."
@@ -160,6 +172,8 @@ sl:
   contacts: 
     create: 
       failure: "Failed to create contact"
+    featured: 
+      featured_users: "Featured Users"
     few: "število stikov %{count}"
     index: 
       add_a_new_aspect: "Add a new aspect"
@@ -201,6 +215,7 @@ sl:
     new: 
       abandon_changes: "Abandon changes?"
       send: "Send"
+      sending: "Sending..."
       subject: "subject"
       to: "to"
     show: 
@@ -272,6 +287,7 @@ sl:
       login: "prijava"
       logout: "odjavi me"
       profile: "profile"
+      recent_notifications: "Recent notifications"
       settings: "settings"
       view_all: "View all"
   likes: 
@@ -288,6 +304,12 @@ sl:
         one: "1 person liked this"
         other: "%{count} people liked this"
         zero: "no people liked this"
+      people_like_this_comment: 
+        few: "%{count} likes"
+        many: "%{count} likes"
+        one: "%{count} like"
+        other: "%{count} likes"
+        zero: "no likes"
   limited: "Limited"
   more: "Več"
   next: "naslednja"
@@ -366,39 +388,31 @@ sl:
       other: "%{actors} started sharing with you."
       zero: "%{actors} started sharing with you."
   notifier: 
-    also_commented: 
-      commented: "prav tako komentirano na objavo osebe %{post_author}:"
-      sign_in: "Za ogled se prijavite."
-      subject: "oseba %{name} je prav tako komentirala %{post_author}."
+    click_here: "click here"
     comment_on_post: 
-      commented: "oseba je komentirala na vašo objavo:"
-      sign_in: "Za ogled se prijavite."
-      subject: "Oseba %{name} je komentirala vašo objavo."
-    diaspora: "diaspora email robot"
+      reply: "Reply or view %{name}'s post >"
+    confirm_email: 
+      click_link: "To activate your new e-mail address %{unconfirmed_email}, please click this link:"
+      subject: "Please activate your new e-mail address %{unconfirmed_email}"
+    email_sent_by_diaspora: "This email was sent by Diaspora.  If you'd like to stop getting emails like this,"
     hello: "Pozdravljeni %{name}!"
     liked: 
       liked: "%{name} has just liked your post: "
-      sign_in: "Sign to view it"
-      subject: "%{name} has just liked your post"
-    love: "vas pozdravlja,"
-    manage_your_email_settings: "manage your email settings"
+      view_post: "View post >"
     mentioned: 
       mentioned: "mentioned you in a post:"
-      sign_in: "Sign in to view it."
       subject: "%{name} has mentioned you on Diaspora*"
     private_message: 
-      message_subject: "Subject: %{subject}"
-      private_message: "has sent you a private message:"
-      sign_in: "Sign in to view it."
-      subject: "oseba %{name} vam je poslala privatno sporočilo v Diaspori*"
+      reply_to_or_view: "Reply to or view this conversation >"
     single_admin: 
       admin: "Vaš administrator Diaspore"
       subject: "Sporočilo o vašem Diaspora računu:"
     started_sharing: 
       sharing: "has started sharing with you!"
-      sign_in: "Sign in here"
       subject: "%{name} has started sharing with you on Diaspora*"
+      view_profile: "View %{name}'s profile"
     thanks: "Hvala,"
+    to_change_your_notification_settings: "to change your notification settings"
   ok: "OK"
   or: "ali"
   password: "Geslo"
@@ -438,10 +452,10 @@ sl:
       add_some: "add some"
       does_not_exist: "Oseba ne obstaja!"
       edit: "edit"
+      has_not_shared_with_you_yet: "%{name} has not shared any posts with you yet!"
       incoming_request: "%{name} želi deliti z vami."
       mention: "Mention"
       message: "Message"
-      no_posts: "ni prispevkov na ogled!"
       not_connected: "S to osebo ne delite"
       recent_posts: "Zadnje objave"
       recent_public_posts: "Zadnje javne objave"
@@ -556,6 +570,20 @@ sl:
       manage_within: "Uredi stike znotraj"
     new_request_to_person: 
       sent: "poslano!"
+  reshares: 
+    create: 
+      failure: "There was an error resharing this post."
+    reshare: 
+      deleted: "Original post deleted by author."
+      reshare: 
+        few: "%{count} Reshares"
+        many: "%{count} Reshares"
+        one: "1 Reshare"
+        other: "%{count} Reshares"
+        zero: "Reshare"
+      reshare_confirmation: "Reshare %{author} - %{text}?"
+      reshare_original: "Reshare orignial"
+      show_original: "Show Original"
   search: "Najdi"
   services: 
     create: 
@@ -690,10 +718,14 @@ sl:
   undo: "Undo?"
   username: "Uporabniško ime"
   users: 
+    confirm_email: 
+      email_confirmed: "E-Mail %{email} activated"
+      email_not_confirmed: "E-Mail could not be activated. Wrong link?"
     destroy: "Uporabniški račun je uspešno zaprt."
     edit: 
       also_commented: "...someone also comments on your contact's post?"
       change: "Spremeni"
+      change_email: "Change E-Mail"
       change_language: "Spremeni jezik"
       change_password: "Spremeni geslo"
       close_account: "Zapri uporabniški račun"
@@ -702,6 +734,7 @@ sl:
       download_photos: "prenesi slike"
       download_xml: "prenesi v xml"
       edit_account: "Uredi uporabniški račun"
+      email_awaiting_confirmation: "We have sent you an activation link to %{unconfirmed_email}. Till you follow this link and activate the new address, we will continue to use your original address %{email}."
       export_data: "Izvozi podatke"
       liked: "...someone likes your post?"
       mentioned: "...you are mentioned in a post?"
@@ -735,6 +768,8 @@ sl:
       language_not_changed: "Sprememba jezika ni uspela"
       password_changed: "Geslo spremenjeno"
       password_not_changed: "Sprememba gesla ni uspela"
+      unconfirmed_email_changed: "E-Mail Changed. Needs activation."
+      unconfirmed_email_not_changed: "E-Mail Change Failed"
   webfinger: 
     fetch_failed: "'webfinger' profil ni bilo mogoče prenesti za %{profile_url}"
     hcard_fetch_failed: "prišlo je do težave pri prenosu 'hCard' kartice za %{account}"

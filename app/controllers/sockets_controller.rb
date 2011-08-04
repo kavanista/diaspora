@@ -7,8 +7,8 @@ class SocketsController < ApplicationController
   include SocketsHelper
   include Rails.application.routes.url_helpers
   helper_method :all_aspects
-  
-  
+  helper_method :current_user
+
   def incoming(msg)
     Rails.logger.info("Socket received connection to: #{msg}")
   end
@@ -17,7 +17,7 @@ class SocketsController < ApplicationController
     #this should be the actual params of the controller
     @params = {:user_or_id => user_or_id, :object => object}.merge(opts)
     return unless Diaspora::WebSocket.is_connected?(user_id)
-    @_request = ActionDispatch::Request.new({})
+    @_request = SocketRequest.new({})
     Diaspora::WebSocket.queue_to_user(user_id, action_hash(user, object, opts))
   end
 
@@ -33,12 +33,21 @@ class SocketsController < ApplicationController
    @user ||= ((@params[:user_or_id].instance_of? User )? @params[:user_or_id] : User.find(user_id))
   end
 
-  helper_method :current_user
   def current_user
     user
   end
 
+  def url_options
+    {:host => "#{AppConfig[:pod_uri].host}:#{AppConfig[:pod_uri].port}"}
+  end
+
   def all_aspects
     @all_aspects ||= user.aspects
+  end
+
+  class SocketRequest < ActionDispatch::Request
+    def format
+      'socket'
+    end
   end
 end

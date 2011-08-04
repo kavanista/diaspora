@@ -37,6 +37,11 @@ class ContactsController < ApplicationController
     render :layout => false
   end
 
+  def featured
+    @featured = true
+    @people = Person.featured_users
+  end
+
   private
 
   def sort_and_paginate_profiles contacts

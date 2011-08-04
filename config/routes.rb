@@ -6,6 +6,8 @@ Diaspora::Application.routes.draw do
 
   # Posting and Reading
 
+  resources :reshares
+
   resources :aspects do
     put :toggle_contact_visibility
   end
@@ -16,7 +18,7 @@ Diaspora::Application.routes.draw do
     resources :likes, :only => [:create, :destroy, :index]
     resources :comments, :only => [:create, :destroy, :index]
   end
-  get 'p/:id' => 'publics#post', :as => 'public_post'
+  get 'p/:guid' => 'publics#post', :as => 'public_post'
 
   # roll up likes into a nested resource above
   resources :comments, :only => [:create, :destroy] do
@@ -68,6 +70,7 @@ Diaspora::Application.routes.draw do
     get 'public/:username'          => :public,          :as => 'users_public'
     match 'getting_started'         => :getting_started, :as => 'getting_started'
     get 'getting_started_completed' => :getting_started_completed
+    get 'confirm_email/:token'      => :confirm_email,   :as => 'confirm_email'
   end
 
   # This is a hack to overide a route created by devise.
@@ -80,7 +83,7 @@ Diaspora::Application.routes.draw do
                                       :invitations   => "invitations"} do
     get 'invitations/resend/:id' => 'invitations#resend', :as => 'invitation_resend'
   end
-  
+
   get 'login' => redirect('/users/sign_in')
 
   scope 'admins', :controller => :admins do
@@ -98,6 +101,7 @@ Diaspora::Application.routes.draw do
   resources :aspect_memberships, :only   => [:destroy, :create, :update]
   resources :post_visibilities,  :only   => [:update]
 
+  get 'featured' => "contacts#featured", :as => 'featured_users'
   resources :people, :except => [:edit, :update] do
     resources :status_messages
     resources :photos
@@ -108,6 +112,7 @@ Diaspora::Application.routes.draw do
       get :tag_index
     end
   end
+  get '/u/:username' => 'people#show', :as => 'user_profile'
 
 
   # Federation
@@ -150,7 +155,6 @@ Diaspora::Application.routes.draw do
   # Mobile site
 
   get 'mobile/toggle', :to => 'home#toggle_mobile', :as => 'toggle_mobile'
-
 
   # Startpage
 

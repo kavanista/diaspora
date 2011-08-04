@@ -26,6 +26,10 @@ it:
           attributes: 
             from_id: 
               taken: "è un duplicato di una richiesta pre-esistente."
+        reshare: 
+          attributes: 
+            root_guid: 
+              taken: "Hai già condiviso quel post!"
         user: 
           attributes: 
             email: 
@@ -59,16 +63,16 @@ it:
   aspects: 
     add_to_aspect: 
       failure: "Errore nell'aggiungere il contatto all'aspetto."
-      success: "Contatto aggiunto all'aspetto con successo."
+      success: "Contatto aggiunto con successo all'aspetto."
     aspect_contacts: 
       done_editing: "modifica eseguita"
     aspect_listings: 
-      add_an_aspect: "+ Aggiungi aspetto della vita"
+      add_an_aspect: "+ Aggiungi un aspetto"
     aspect_stream: 
       commented_on: "commenti"
       posted: "post"
       recently: "ordina per:"
-      stream: "Ultime novità"
+      stream: "Stream"
     contacts_not_visible: "I contatti in questo aspetto non potranno vedersi tra loro."
     contacts_visible: "I contatti in questo aspetto potranno vedersi tra loro."
     create: 
@@ -79,8 +83,8 @@ it:
       success: "%{name} è stato rimosso con successo."
     edit: 
       add_existing: "Aggiungi un contatto esistente"
-      aspect_list_is_not_visible: "l'elenco degli aspetti è nascosto agli altri nell'aspetto"
-      aspect_list_is_visible: "l'elenco degli aspetti è visibile agli altri nell'aspetto"
+      aspect_list_is_not_visible: "la lista dei contatti non è visibile a chi è nell'aspetto"
+      aspect_list_is_visible: "la lista dei contatti è visibile a chi è nell'aspetto"
       confirm_remove_aspect: "Sei sicuro di voler eliminare questo aspetto?"
       done: "Completato"
       make_aspect_list_visible: "rendi visibile la lista degli aspetti?"
@@ -102,8 +106,11 @@ it:
         content_1: "Il tuo ID è:"
         content_2: "Chi lo conosce potrà trovarti facilmente su Diaspora, spargi la voce!"
         heading: "ID Diaspora"
+      donate: "Fai una donazione"
       handle_explanation: "Questo è il tuo ID su Diaspora. Lo puoi dare alle persone per farti trovare, come un indirizzo email."
+      keep_us_running: "Fai andare %{pod} veloce come un razzo, finanzia la razione mensile di caffè per i nostri server!"
       no_contacts: "Nessun contatto"
+      no_tags: "+ Cerca tag da seguire"
       people_sharing_with_you: "Persone in condivisione con te"
       post_a_message: "invia un messaggio >>"
       services: 
@@ -120,12 +127,17 @@ it:
       create: "Crea"
       name: "Nome"
     no_posts_message: 
+      featured_users: "Utenti consigliati"
+      or_featured: "Oppure puoi condividere i tuoi post con %{link}"
       start_talking: "Ancora nessuno ha scritto nulla. Inizia la conversazione!"
-      try_adding_some_more_contacts: "Prova ad aggiungere altri contatti."
+      try_adding_some_more_contacts: "Puoi cercare altri contatti (in alto) oppure mandare inviti (a destra)."
+      you_should_add_some_more_contacts: "Dovresti aggiungere qualche altro contatto!"
     one: "un aspetto"
     other: "%{count} aspetti"
     seed: 
+      acquaintances: "Conoscenti"
       family: "Famiglia"
+      friends: "Amici"
       work: "Lavoro"
     selected_contacts: 
       manage_your_aspects: "Amministra gli aspetti della tua vita"
@@ -152,7 +164,7 @@ it:
     few: "%{count} commenti"
     many: "%{count} commenti"
     new_comment: 
-      comment: "Commento"
+      comment: "Commenta"
       commenting: "Invio commento in corso..."
     one: "1 commento"
     other: "%{count} commenti"
@@ -160,6 +172,8 @@ it:
   contacts: 
     create: 
       failure: "Impossibile creare il contatto"
+    featured: 
+      featured_users: "Utenti consigliati"
     few: "%{count} contatti"
     index: 
       add_a_new_aspect: "Aggiungi aspetto della vita"
@@ -201,6 +215,7 @@ it:
     new: 
       abandon_changes: "Annulla i cambiamenti?"
       send: "Invia"
+      sending: "Invio in corso..."
       subject: "oggetto"
       to: "a"
     show: 
@@ -218,7 +233,7 @@ it:
       correct_the_following_errors_and_try_again: "Correggi i seguenti errori e riprova."
       invalid_fields: "Campi non validi"
   fill_me_out: "Scrivi qui"
-  find_people: "Cerca persone"
+  find_people: "Cerca persone o #tag"
   hide: "Nascondi"
   home: 
     show: 
@@ -272,6 +287,7 @@ it:
       login: "accedi"
       logout: "esci"
       profile: "profilo"
+      recent_notifications: "Notifiche recenti"
       settings: "impostazioni"
       view_all: "Elenco completo"
   likes: 
@@ -288,6 +304,12 @@ it:
         one: "%{count} Mi piace"
         other: "%{count} Mi piace"
         zero: "0 Mi piace"
+      people_like_this_comment: 
+        few: "%{count} mi piace"
+        many: "%{count} mi piace"
+        one: "%{count} mi piace"
+        other: "%{count} mi piace"
+        zero: "0 mi piace"
   limited: "Non pubblico"
   more: "Altro"
   next: "successivo"
@@ -366,39 +388,31 @@ it:
       other: "%{actors} hanno iniziato a condividere con te."
       zero: "%{actors} ha iniziato a condividere con te."
   notifier: 
-    also_commented: 
-      commented: "ha anche commentato sul post di %{post_author}:"
-      sign_in: "Accedi per vederlo."
-      subject: "%{name} ha anche commentato sul post di %{post_author}."
+    click_here: "clicca qui"
     comment_on_post: 
-      commented: "ha commentato il tuo post:"
-      sign_in: "Accedi per vederlo."
-      subject: "%{name} ha commentato il tuo post."
-    diaspora: "il robot che manda email per diaspora"
+      reply: "Rispondi o leggi il post di %{name} >"
+    confirm_email: 
+      click_link: "Per attivare il nuo nuovo indirizzo email %{unconfirmed_email}, per favore clicca su questo link:"
+      subject: "Per favore attiva il tuo nuovo indirizzo email %{unconfirmed_email}"
+    email_sent_by_diaspora: "Questo messaggio è stato spedito da Diaspora.  Se preferisci smettere di ricevere questo tipo di email,"
     hello: "Ciao %{name}!"
     liked: 
       liked: "%{name} ha appena apprezzato il tuo post: "
-      sign_in: "Per vedere è necessario accedere"
-      subject: "%{name} ha appena apprezzato il tuo post"
-    love: "pace e bene,"
-    manage_your_email_settings: "gestisci le tue impostazioni email"
+      view_post: "Leggi il post >"
     mentioned: 
       mentioned: "ti ha menzionato in un post:"
-      sign_in: "Accedi per vederlo."
       subject: "%{name} ti ha menzionato su Diaspora*"
     private_message: 
-      message_subject: "Oggetto: %{subject}"
-      private_message: "ti ha inviato un messaggio privato:"
-      sign_in: "Accedi per vederlo."
-      subject: "%{name} ti ha inviato un messaggio privato su Diaspora*"
+      reply_to_or_view: "Rispondi o leggi questa conversazione >"
     single_admin: 
       admin: "Il tuo amministratore Diaspora"
       subject: "Un messaggio sul tuo account Diaspora:"
     started_sharing: 
       sharing: "ha iniziato a condividere con te!"
-      sign_in: "Accedi qui"
       subject: "%{name} ha iniziato a condividere con te su Diaspora*"
+      view_profile: "Guarda il profilo di %{name}"
     thanks: "Grazie,"
+    to_change_your_notification_settings: "per cambiare le opzioni delle notifiche"
   ok: "OK"
   or: "o"
   password: "Password"
@@ -438,10 +452,10 @@ it:
       add_some: "aggiungine alcune"
       does_not_exist: "La persona non esiste!"
       edit: "modifica"
+      has_not_shared_with_you_yet: "%{name} non ha ancora condiviso nessun post con te!"
       incoming_request: "%{name} vuole condividere con te"
       mention: "Menziona"
       message: "Messaggio"
-      no_posts: "nessun post da mostrare!"
       not_connected: "Non sei in contatto con %{name}"
       recent_posts: "Post Recenti"
       recent_public_posts: "Post Pubblici Recenti"
@@ -530,7 +544,7 @@ it:
       unhappy: "Triste?"
       update: "Aggiorna"
     new: 
-      enter_email: "Inserisci un e-mail"
+      enter_email: "Inserisci un indirizzo email"
       enter_password: "Inserisci una password"
       enter_password_again: "Inserisci la stessa password di prima"
       enter_username: "Scegli un nome utente (inserisci solo lettere, numeri e trattino basso)"
@@ -556,6 +570,20 @@ it:
       manage_within: "Amministra contatti"
     new_request_to_person: 
       sent: "richiesta inviata!"
+  reshares: 
+    create: 
+      failure: "C'è stato un errore nel condividere questo post."
+    reshare: 
+      deleted: "Il post originale è stato eliminato dall'autore."
+      reshare: 
+        few: "%{count} condivisioni"
+        many: "%{count} condivisioni"
+        one: "1 condivisione"
+        other: "%{count} condivisioni"
+        zero: "Condividi"
+      reshare_confirmation: "Vuoi condividere il post di %{author} con i tuoi contatti?"
+      reshare_original: "Condividi l'originale"
+      show_original: "Mostra l'originale"
   search: "Cerca"
   services: 
     create: 
@@ -603,7 +631,7 @@ it:
       logged_in_as: "accesso effettuato come %{name}"
       your_aspects: "i tuoi aspetti"
     invitations: 
-      by_email: "Via Email"
+      by_email: "Via email"
       dont_have_now: "Non ne hai alcuno per il momento, ma altri arriveranno presto!"
       from_facebook: "Da Facebook"
       invitations_left: "%{count} rimanenti"
@@ -633,7 +661,7 @@ it:
       upload_photos: "Carica foto"
       whats_on_your_mind: "A cosa stai pensando?"
     reshare: 
-      reshare: "Ricondividi"
+      reshare: "Condividi"
     stream_element: 
       dislike: "Non mi piace"
       like: "Mi piace"
@@ -690,22 +718,27 @@ it:
   undo: "Annullare?"
   username: "Nome Utente"
   users: 
+    confirm_email: 
+      email_confirmed: "Email %{email} attivata"
+      email_not_confirmed: "L'email non è stata attivata. C'è un errore nel link?"
     destroy: "Il tuo account è stato bloccato. Potrebbero occorrerci 20 minuti per terminare la chiusura del tuo account. Grazie per aver provato Diaspora."
     edit: 
       also_commented: "...qualcun altro ha commentato il post del tuo contatto?"
       change: "Cambia"
+      change_email: "Cambia email"
       change_language: "Cambia lingua"
-      change_password: "Cambia Password"
+      change_password: "Cambia password"
       close_account: "Chiudi account"
       comment_on_post: "...qualcuno ha commentato il tuo post?"
       current_password: "Password attuale"
       download_photos: "scarica le mie foto"
       download_xml: "scarica il mio xml"
       edit_account: "Modifica account"
+      email_awaiting_confirmation: "È stato spedito su %{unconfirmed_email} un link di attivazione. Continueremo ad usare la tua email originale %{email} finché non cliccherai sul link e attiverai il nuovo indirizzo."
       export_data: "Esporta Dati"
       liked: "...a qualcuno piace il tuo post?"
       mentioned: "...sei menzionato in un post?"
-      new_password: "Nuova Password"
+      new_password: "Nuova password"
       private_message: "...hai ricevuto un messaggio privato?"
       receive_email_notifications: "Ricevi notifiche via email quando..."
       started_sharing: "...qualcuno vuole condividere con te?"
@@ -732,9 +765,11 @@ it:
     update: 
       email_notifications_changed: "Notifiche email modificate con successo"
       language_changed: "Lingua cambiata"
-      language_not_changed: "Cambio di lingua fallito"
+      language_not_changed: "Il cambio di lingua è fallito"
       password_changed: "Password cambiata. Ora puoi effettuare l'accesso con la tua nuova password."
-      password_not_changed: "Cambio di password fallito"
+      password_not_changed: "Il cambio di password è fallito"
+      unconfirmed_email_changed: "L'email è cambiata. E' necessario attivare l'indirizzo."
+      unconfirmed_email_not_changed: "Il cambio di email è fallito"
   webfinger: 
     fetch_failed: "impossibile recuperare il profilo webfinger da %{profile_url}"
     hcard_fetch_failed: "impossibile recuperare l'hcard di %{account}"

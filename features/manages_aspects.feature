@@ -35,3 +35,39 @@ Feature: User manages contacts
     And I wait for the ajax to finish
     Then I should have 0 contacts in "Cat People"
 
+  Scenario: scrolling through contacts index
+    Given I am signed in
+    And I have 60 contacts
+    And I am on the contacts page
+    Then I should see 25 contacts
+
+    When I scroll down
+    Then I should see 50 contacts
+
+    When I scroll down
+    Then I should see 60 contacts
+
+
+  Scenario: clicking on the contacts link in the header with zero contacts directs a user to the featured users page
+    Given I am signed in
+    And I have 0 contacts
+    And I am on the home page
+
+    When I follow "Contacts"
+    Then I should see "Featured Users" within ".span-18"
+
+  Scenario: clicking on the manage aspects link in the right nav with zero contacts directs a user to the featured users page
+    Given I am signed in
+    And I have 0 contacts
+    And I am on the home page
+
+    When I follow "Manage your aspects."
+    Then I should see "Featured Users" within ".span-18"
+
+  Scenario: clicking on the contacts link in the header with contacts does not send a user to the featured users page
+    Given I am signed in
+    And I have 2 contacts
+    And I am on the home page
+
+    When I follow "Contacts"
+    Then I should not see "Featured Users" within "#section_header"

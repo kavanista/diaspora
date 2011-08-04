@@ -68,4 +68,18 @@ describe ContactsController do
       save_fixture(html_for("body"), "aspects_manage")
     end
   end
+
+  describe '#featured' do
+    it 'succeeds' do
+      get :featured
+      response.should be_success
+    end
+
+    it 'gets queries for users in the app config' do
+      AppConfig[:featured_users] = [alice.diaspora_handle]
+
+      get :featured
+      assigns[:people].should == [alice.person]
+    end
+  end
 end

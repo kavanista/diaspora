@@ -26,6 +26,10 @@ ko:
           attributes: 
             from_id: 
               taken: "이미 요청했습니다."
+        reshare: 
+          attributes: 
+            root_guid: 
+              taken: "이미 재공유된 공유물입니다!"
         user: 
           attributes: 
             email: 
@@ -102,8 +106,11 @@ ko:
         content_1: "내 디아스포라 ID:"
         content_2: "내 ID를 주면 누구든지 디아스포라에서 날 찾을수 있습니다."
         heading: "디아스포라 ID"
+      donate: "Donate"
       handle_explanation: "이 디아스포라 핸들은 이메일 주소처럼 남에게 건넬 수 있습니다."
+      keep_us_running: "Keep %{pod} running fast, buy our servers their monthly coffee fix!"
       no_contacts: "컨택 없음"
+      no_tags: "태그 없음"
       people_sharing_with_you: "나와 공유하는 사람들"
       post_a_message: "새 메시지 올리기 >>"
       services: 
@@ -120,12 +127,17 @@ ko:
       create: "만들기"
       name: "이름"
     no_posts_message: 
+      featured_users: "featured users"
+      or_featured: "Or you can share with %{link}"
       start_talking: "아직 아무 이야기도 없습니다. 대화를 시작하세요!"
       try_adding_some_more_contacts: "컨택을 더 추가해보세요."
+      you_should_add_some_more_contacts: "You should add some more contacts!"
     one: "애스펙 한 개"
     other: "애스펙 %{count}개"
     seed: 
+      acquaintances: "Acquaintances"
       family: "가족"
+      friends: "Friends"
       work: "직장"
     selected_contacts: 
       manage_your_aspects: "내 애스펙 관리하기."
@@ -160,6 +172,8 @@ ko:
   contacts: 
     create: 
       failure: "컨택을 만들 수 없습니다"
+    featured: 
+      featured_users: "Featured Users"
     few: "컨택 %{count}명"
     index: 
       add_a_new_aspect: "새 애스펙 추가"
@@ -201,6 +215,7 @@ ko:
     new: 
       abandon_changes: "변경을 포기할까요?"
       send: "보내기"
+      sending: "Sending..."
       subject: "제목"
       to: "받는이"
     show: 
@@ -264,7 +279,7 @@ ko:
       public_feed: "%{name}님의 공개 디아스포라 피드"
       toggle: "모바일 사이트 전환"
       whats_new: "새로운 점"
-      your_aspects: "애스펙"
+      your_aspects: "내 애스펙"
     header: 
       admin: "관리자"
       blog: "블로그"
@@ -272,6 +287,7 @@ ko:
       login: "로그인"
       logout: "로그아웃"
       profile: "프로필"
+      recent_notifications: "최근 알림"
       settings: "설정"
       view_all: "모두 보기"
   likes: 
@@ -288,7 +304,13 @@ ko:
         one: "한 명이 좋아합니다"
         other: "%{count}명이 좋아합니다"
         zero: "아무도 좋아하지 않습니다"
-  limited: "Limited"
+      people_like_this_comment: 
+        few: "%{count}명이 좋아합니다"
+        many: "%{count}명이 좋아합니다"
+        one: "한 명이 좋아합니다"
+        other: "%{count}명이 좋아합니다"
+        zero: "아무도 좋아하지 않습니다"
+  limited: "제한됨"
   more: "더"
   next: "다음"
   no_results: "결과 없음"
@@ -366,39 +388,31 @@ ko:
       other: "%{actors}님이 나와 공유를 시작했습니다."
       zero: "%{actors}님이 나와 공유를 시작했습니다."
   notifier: 
-    also_commented: 
-      commented: "님도 %{post_author}님의 공유물에 댓글을 달았습니다:"
-      sign_in: "로그인하기"
-      subject: "%{name}님도 %{post_author}님의 공유물에 댓글을 달았습니다."
+    click_here: "여기를 클릭하세요"
     comment_on_post: 
-      commented: "님이 내 공유물에 댓글을 달았습니다:"
-      sign_in: "로그인하기"
-      subject: "%{name}님이 내 공유물에 댓글을 달았습니다."
-    diaspora: "디아스포라 자동 이메일"
+      reply: "%{name}님의 공유물에 댓글달기 >"
+    confirm_email: 
+      click_link: "To activate your new e-mail address %{unconfirmed_email}, please click this link:"
+      subject: "Please activate your new e-mail address %{unconfirmed_email}"
+    email_sent_by_diaspora: "이 메일은 디아스포라가 보냈습니다. 앞으로 받고싶지 않다면"
     hello: "%{name}님!"
     liked: 
       liked: "%{name}님이 내 공유물을 좋아합니다:"
-      sign_in: "Sign to view it"
-      subject: "%{name}님이 내 공유물을 좋아합니다."
-    love: ""
-    manage_your_email_settings: "이메일 설정 관리"
+      view_post: "공유물 보기 >"
     mentioned: 
       mentioned: "님이 공유물에서 나를 멘션했습니다:"
-      sign_in: "로그인하기"
       subject: "%{name}님이 디아스포라*에서 나를 멘션했습니다"
     private_message: 
-      message_subject: "제목: %{subject}"
-      private_message: "님이 디아스포라*에서 쪽지를 보냈습니다:"
-      sign_in: "로그인하기"
-      subject: "%{name}님이 디아스포라*에서 쪽지를 보냈습니다"
+      reply_to_or_view: "이 쪽지 답장 또는 보기 >"
     single_admin: 
       admin: "디아스포라 관리자"
       subject: "내 디아스포라 계정에 대한 메시지:"
     started_sharing: 
       sharing: "님이 나와 공유를 시작했습니다!"
-      sign_in: "여기서 로그인하세요"
       subject: "%{name}님이 디아스포라*에서 나와 공유를 시작했습니다."
+      view_profile: "%{name}님의 프로필 보기"
     thanks: "고맙습니다."
+    to_change_your_notification_settings: "내 알림 설정을 바꾸기 위해"
   ok: "확인"
   or: "또는"
   password: "암호"
@@ -438,10 +452,10 @@ ko:
       add_some: "태그 달기"
       does_not_exist: "없는 사람입니다!"
       edit: "고치기"
+      has_not_shared_with_you_yet: "%{name} has not shared any posts with you yet!"
       incoming_request: "%{name}님이 나와 공유하길 원합니다"
       mention: "멘션"
       message: "쪽지"
-      no_posts: "보여줄 공유물이 없습니다!"
       not_connected: "열결되지 않은 사람입니다"
       recent_posts: "최근 공유물"
       recent_public_posts: "최근 공개 공유물"
@@ -492,17 +506,17 @@ ko:
       post_hidden: "%{name}님의 공유물을 감췄습니다."
   posts: 
     show: 
-      destroy: "Delete"
-      not_found: "Sorry, we couldn't find that post."
-      permalink: "permalink"
+      destroy: "지우기"
+      not_found: "해당 공유물을 찾을 수 없습니다."
+      permalink: "영구 링크"
   previous: "이전"
   profile: "프로필"
   profiles: 
     edit: 
-      allow_search: "디아스포라에서 검색됩니다"
+      allow_search: "디아스포라에서 검색되겠습니다"
       edit_profile: "프로필 고치기"
       first_name: "이름"
-      last_name: "성씨"
+      last_name: "성"
       update_profile: "프로필 갱신"
       your_bio: "자기소개"
       your_birthday: "생년월일"
@@ -512,8 +526,8 @@ ko:
       your_photo: "사진"
       your_private_profile: "개인 프로필"
       your_public_profile: "공개 프로필"
-      your_tags: "태그 #tag"
-      your_tags_placeholder: "예) #diaspora #ironing #kittens #music"
+      your_tags: "다섯 또는 보다 적은 낱말로 나를 표현하세요"
+      your_tags_placeholder: "예) #movies #kittens #travel #teacher #newyork"
     update: 
       failed: "프로필 갱신 실패"
       updated: "프로필을 갱신했습니다"
@@ -556,6 +570,20 @@ ko:
       manage_within: "컨택 관리하기:"
     new_request_to_person: 
       sent: "보냈습니다."
+  reshares: 
+    create: 
+      failure: "이 공유물을 재공유하는데 오류가 발생했습니다."
+    reshare: 
+      deleted: "주인이 원래 공유물을 지웠습니다."
+      reshare: 
+        few: "%{count} Reshares"
+        many: "%{count} Reshares"
+        one: "1 Reshare"
+        other: "%{count} Reshares"
+        zero: "재공유"
+      reshare_confirmation: "%{author}님의 %{text} 공유물을 재공유합니까?"
+      reshare_original: "Reshare orignial"
+      show_original: "Show Original"
   search: "검색"
   services: 
     create: 
@@ -690,10 +718,14 @@ ko:
   undo: "돌이키겠습니까?"
   username: "사용자명"
   users: 
+    confirm_email: 
+      email_confirmed: "E-Mail %{email} activated"
+      email_not_confirmed: "E-Mail could not be activated. Wrong link?"
     destroy: "계정을 성공적으로 없앴습니다."
     edit: 
       also_commented: "댓글 달았던 공유물에 내 컨택도 댓글을 달았을 때"
       change: "바꾸기"
+      change_email: "Change E-Mail"
       change_language: "언어 바꾸기"
       change_password: "암호 바꾸기"
       close_account: "계정 없애기"
@@ -702,6 +734,7 @@ ko:
       download_photos: "내 사진 다운로드"
       download_xml: "내 xml 다운로드"
       edit_account: "계정 고치기"
+      email_awaiting_confirmation: "We have sent you an activation link to %{unconfirmed_email}. Till you follow this link and activate the new address, we will continue to use your original address %{email}."
       export_data: "자료 뽑아내기"
       liked: "누군가가 내 공유물을 좋아할 때"
       mentioned: "내가 멘션되었을 때"
@@ -735,6 +768,8 @@ ko:
       language_not_changed: "언어를 바꿀 수 없습니다"
       password_changed: "암호를 바꿨습니다"
       password_not_changed: "암호를 바꿀 수 없습니다"
+      unconfirmed_email_changed: "E-Mail Changed. Needs activation."
+      unconfirmed_email_not_changed: "E-Mail Change Failed"
   webfinger: 
     fetch_failed: "failed to fetch webfinger profile for %{profile_url}"
     hcard_fetch_failed: "there was a problem fetching the hcard for %{account}"

@@ -43,43 +43,39 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :diaspora_handle
 
   scope :searchable, joins(:profile).where(:profiles => {:searchable => true})
+  scope :remote, where('people.owner_id IS NULL')
+  scope :local, where('people.owner_id IS NOT NULL')
 
+  def self.featured_users
+    if AppConfig[:featured_users].present?
+      Person.where(:diaspora_handle => AppConfig[:featured_users])
+    end
+  end
+  
   def self.search_query_string(query)
+    query = query.downcase
+
     if postgres?
       where_clause = <<-SQL
-        profiles.first_name ILIKE ? OR
-        profiles.last_name ILIKE ? OR
-        people.diaspora_handle ILIKE ?
+        profiles.full_name ILIKE ? OR
+        profiles.diaspora_handle ILIKE ?
       SQL
     else
       where_clause = <<-SQL
-        profiles.first_name LIKE ? OR
-        profiles.last_name LIKE ? OR
-        people.diaspora_handle LIKE ? OR
-        profiles.first_name LIKE ? OR
-        profiles.last_name LIKE ?
+        profiles.full_name LIKE ? OR
+        people.diaspora_handle LIKE ?
       SQL
     end
 
-    sql = ""
-    tokens = []
-
-    query_tokens = query.to_s.strip.split(" ")
-    query_tokens.each_with_index do |raw_token, i|
-      token = "#{raw_token}%"
-      up_token = "#{raw_token.titleize}%"
-      sql << " OR " unless i == 0
-      sql << where_clause
-      tokens.concat([token, token, token])
-      tokens.concat([up_token, up_token]) unless postgres?
-    end
-    [sql, tokens]
+    q_tokens = query.to_s.strip.gsub(/(\s|$|^)/) { "%#{$1}" }
+    [where_clause, [q_tokens, q_tokens]]
   end
 
   def self.search(query, user)
-    return [] if query.to_s.blank? || query.to_s.length < 3
+    return [] if query.to_s.blank? || query.to_s.length < 2
 
     sql, tokens = self.search_query_string(query)
+
     Person.searchable.where(sql, *tokens).joins(
       "LEFT OUTER JOIN contacts ON contacts.user_id = #{user.id} AND contacts.person_id = people.id"
     ).includes(:profile
@@ -97,8 +93,6 @@ class Person < ActiveRecord::Base
       ["contacts.user_id #{order}", "profiles.last_name ASC", "profiles.first_name ASC"]
     }.call
   end
-
-
 
   def self.public_search(query, opts={})
     return [] if query.to_s.blank? || query.to_s.length < 3
@@ -235,7 +229,6 @@ class Person < ActiveRecord::Base
   protected
 
   def clean_url
-    self.url ||= "http://localhost:3000/" if self.class == User
     if self.url
       self.url = 'http://' + self.url unless self.url.match(/https?:\/\//)
       self.url = self.url + '/' if self.url[-1, 1] != '/'

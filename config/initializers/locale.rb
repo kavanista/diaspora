@@ -2,9 +2,14 @@
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
+require 'i18n_interpolation_fallbacks'
+
 # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
 I18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 I18n.default_locale = DEFAULT_LANGUAGE
+
+I18n::Backend::Simple.send(:include, I18n::Backend::InterpolationFallbacks)
+
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
 AVAILABLE_LANGUAGE_CODES.each do |c|
   if LANGUAGE_CODES_MAP.key?(c)
@@ -15,12 +20,3 @@ AVAILABLE_LANGUAGE_CODES.each do |c|
   end
 end
 
-# Workaround for https://rails.lighthouseapp.com/projects/8994/tickets/5329-using-i18nwith_locale-in-actionmailer-raises-systemstackerror
-module AbstractController
-  class I18nProxy
-    def initialize(i18n_config, lookup_context)
-      @i18n_config, @lookup_context = i18n_config, lookup_context
-      @i18n_config = @i18n_config.i18n_config if @i18n_config.respond_to?(:i18n_config)
-    end
-  end
-end

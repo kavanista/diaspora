@@ -29,8 +29,8 @@ class PeopleController < ApplicationController
       format.all do
         #only do it if it is an email address
         if params[:q].try(:match, Devise.email_regexp)
-          webfinger(params[:q])
           people = Person.where(:diaspora_handle => params[:q])
+          webfinger(params[:q]) if people.empty?
         else
           people = Person.search(params[:q], current_user)
         end
@@ -61,7 +61,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.where(:id => params[:id]).first
+    @person = find_person_from_id_or_username
     if @person && @person.remote? && !user_signed_in?
       render :file => "#{Rails.root}/public/404.html", :layout => false, :status => 404
       return
@@ -96,13 +96,12 @@ class PeopleController < ApplicationController
           else
             @commenting_disabled = false
           end
-          @posts = current_user.posts_from(@person).where(:type => ["StatusMessage", "ActivityStreams::Photo"]).includes(:comments).limit(15).where(StatusMessage.arel_table[:created_at].lt(max_time))
+          @posts = current_user.posts_from(@person).where(:type => ["StatusMessage", "Reshare", "ActivityStreams::Photo"]).includes(:comments).limit(15).where(StatusMessage.arel_table[:created_at].lt(max_time))
         else
           @commenting_disabled = true
-          @posts = @person.posts.where(:type => ["StatusMessage", "ActivityStreams::Photo"], :public => true).includes(:comments).limit(15).where(StatusMessage.arel_table[:created_at].lt(max_time)).order('posts.created_at DESC')
+          @posts = @person.posts.where(:type => ["StatusMessage", "Reshare", "ActivityStreams::Photo"], :public => true).includes(:comments).limit(15).where(StatusMessage.arel_table[:created_at].lt(max_time)).order('posts.created_at DESC')
         end
-
-        @posts = PostsFake.new(@posts)
+        @posts.includes(:author => :profile)
       end
 
       if params[:only_posts]
@@ -157,4 +156,13 @@ class PeopleController < ApplicationController
     Resque.enqueue(Job::SocketWebfinger, current_user.id, account, opts)
   end
 
+  def find_person_from_id_or_username
+    if params[:id].present?
+      Person.where(:id => params[:id]).first
+    elsif params[:username].present?
+      User.find_by_username(params[:username]).person
+    else
+      nil
+    end
+  end
 end

@@ -20,11 +20,18 @@
       self.globalSubscribe("stream/scrolled stream/reloaded", self.updateTimeAgo);
     });
 
+    this.timeAgoElement = function(selector) {
+      return $((typeof selector === "string") ? selector : this.selector);
+    };
 
-    this.updateTimeAgo = function(selector) {
-      $((selector) ? selector : self.element).timeago();
+    this.updateTimeAgo = function() {
+      if (arguments.length > 1){
+        var new_elements = Array.prototype.slice.call(arguments,1);
+        $(new_elements).find(self.selector).timeago();
+      }else{
+        self.timeAgoElement().timeago();
+      }
     };
   };
-
-  Diaspora.Widgets.add("TimeAgo", TimeAgo);
+  Diaspora.widgets.add("timeago", TimeAgo);
 })();

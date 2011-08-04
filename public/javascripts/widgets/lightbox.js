@@ -43,6 +43,8 @@ jQuery.fn.center = (function() {
         evt.preventDefault();
         self.resetLightbox();
       });
+      self.backdrop.click(self.resetLightbox);
+      self.lightbox.click(self.resetLightbox);
 
       self.backdrop.click(function(evt) {
         evt.preventDefault();
@@ -86,7 +88,7 @@ jQuery.fn.center = (function() {
 
     this.lightboxImageClicked = function(evt) {
       evt.preventDefault();
-      
+
       var selectedImage = $(this).find("img.stream-photo"),
         imageUrl = selectedImage.attr("data-full-photo"),
         images = selectedImage.parents('.stream_element').find('img.stream-photo'),
@@ -114,7 +116,7 @@ jQuery.fn.center = (function() {
 
     this.imagesetImageClicked = function(evt) { 
       evt.preventDefault();
-     
+      evt.stopPropagation();
 
       self.selectImage($(this));
     };

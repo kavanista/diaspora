@@ -16,13 +16,10 @@ var View = {
       jQuery("#facebox label").inFieldLabels();
     });
 
-//    Diaspora.Page.subscribe("stream/scrolled", function() {
-//      $('#main_stream .comments label').inFieldLabels();
-//    });
-//
-//    Diaspora.Page.subscribe("stream/reloaded", function() {
-//      $('#main_stream .comments label').inFieldLabels();
-//    });
+    Diaspora.Page.subscribe("stream/scrolled", function() {
+      var new_elements = Array.prototype.slice.call(arguments,1)
+      $(new_elements).find('label').inFieldLabels();
+    });
 
     /* "Toggling" the search input */
     $(this.search.selector)
@@ -36,13 +33,23 @@ var View = {
       .live('click', this.dropdowns.click);
 
 
+    /* Clear forms after successful submit */
+    $('form[data-remote]').live('ajax:success', function (e) {
+      $(this).clearForm();
+      $(this).focusout();
+    });
+
     /* Autoexpand textareas */
     var startAutoResize = function() {
-      $('textarea')
-        .autoResize({
-          'animate': false,
-          'extraSpace': 5
-        });
+     if (arguments.length > 1){
+        target = $(Array.prototype.slice.call(arguments,1)).find('textarea');
+      }else{
+        target = $('textarea')
+      }
+      target.autoResize({
+                          'animate': false,
+                          'extraSpace': 5
+                        });
     }
 //    Diaspora.Page.subscribe("stream/scrolled", startAutoResize)
 //    Diaspora.Page.subscribe("stream/reloaded", startAutoResize)
@@ -59,6 +66,10 @@ var View = {
     $('a[rel*=facebox]').facebox();
     $(document).bind('reveal.facebox', function() {
       Diaspora.Page.directionDetector.updateBinds();
+    });
+
+    $("a.new_aspect").click(function(e){
+      $("input#aspect_name").focus()
     });
 
     /* facebox 'done' buttons */
