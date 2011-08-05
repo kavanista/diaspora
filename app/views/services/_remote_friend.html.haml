@@ -34,5 +34,5 @@
   %li{:id => "options_" + friend.uid, :class => "share_with hidden", :style => "height:auto"}
     - contact = friend.contact
     - contact ||= Contact.new(:person => friend.person)
-    = aspect_memberhip_dropdown(contact, friend.person, 'left')
+    = aspect_membership_dropdown(contact, friend.person, 'left')
 
