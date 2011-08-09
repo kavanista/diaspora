@@ -3,7 +3,7 @@
 #   the COPYRIGHT file.
 
 
-pl: 
+en_pirate: 
   javascripts: 
     aspect_dropdown: 
       add_to_aspect: "Add to aspect"
@@ -16,37 +16,37 @@ pl:
     comments: 
       hide: "hide comments"
       show: "show all comments"
-    confirm_dialog: "Czy @{m,f:jesteś|n:na}{ pew}{m:ien|f:na|n:no}?"
+    confirm_dialog: "Are you sure?"
     failed_to_like: "Failed to like!"
     failed_to_post_message: "Failed to post message!"
     infinite_scroll: 
       no_more: "No more posts."
     publisher: 
-      at_least_one_aspect: "Musisz udostępnić dla co najmniej jednego aspektu"
+      at_least_one_aspect: "You must publish to at least one aspect"
       limited: "Limited - your post will only be seen by people you are sharing with"
       public: "Public - your post will be visible to everyone and found by search engines"
     reshares: 
       duplicate: "You've already reshared that post!"
-    search_for: "Szukaj: {{name}}"
+    search_for: "Search for {{name}}"
     show_more: "show more"
     timeago: 
-      day: "dzień"
-      days: "%d dni"
-      hour: "około godzinę"
-      hours: "około %d godzin"
-      minute: "około minuty"
-      minutes: "%d minut"
-      month: "około miesiąca"
-      months: "%d miesięcy"
+      day: "a day"
+      days: "%d days"
+      hour: "about an hour"
+      hours: "about %d hours"
+      minute: "about a minute"
+      minutes: "%d minutes"
+      month: "about a month"
+      months: "%d months"
       prefixAgo: ""
       prefixFromNow: ""
-      seconds: "niecałą minutę"
-      suffixAgo: "temu"
-      suffixFromNow: "od teraz"
-      year: "około roku"
-      years: "%d lat"
+      seconds: "less than a minute"
+      suffixAgo: "ago"
+      suffixFromNow: "from now"
+      year: "about a year"
+      years: "%d years"
     videos: 
-      unknown: "Nieznany typ wideo"
-      watch: "Oglądaj to wideo na {{provider}}"
+      unknown: "Unknown video type"
+      watch: "Watch this video on {{provider}}"
     web_sockets: 
       disconnected: "The websocket is closed; posts will no longer be streamed live."

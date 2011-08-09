@@ -3,14 +3,14 @@
 #   the COPYRIGHT file.
 
 
-pa: 
+en_pirate: 
   _applications: "Applications"
-  _comments: "ਟਿੱਪਣੀਆਂ"
-  _contacts: "ਸੰਪਰਕ"
-  _home: "ਘਰ"
-  _photos: "ਫੋਟੋ"
-  _services: "ਸਰਵਿਸਾਂ"
-  account: "ਅਕਾਊਂਟ"
+  _comments: "Comments"
+  _contacts: "Mateys"
+  _home: "Home"
+  _photos: "photos"
+  _services: "Services"
+  account: "Account"
   activerecord: 
     errors: 
       models: 
@@ -38,26 +38,26 @@ pa:
               invalid: "is invalid."
             username: 
               taken: "is already taken."
-  ago: "%{time} ਪਹਿਲਾਂ"
-  all_aspects: "All aspects"
+  ago: "%{time} ago"
+  all_aspects: "Yer Crews"
   application: 
     helper: 
       diaspora_alpha: "DIASPORA* ALPHA"
       unknown_person: "unknown person"
       video_title: 
         unknown: "Unknown Video Title"
-  are_you_sure: "ਕੀ ਤੁਸੀਂ ਚਾਹੁੰਦੇ ਹੋ?"
+  are_you_sure: "Are you sure?"
   aspect_memberships: 
     aspect_dropdown: 
-      add_to_aspect: "Add to aspect"
+      add_to_aspect: "Add to Crew"
       toggle: 
-        few: "In %{count} aspects"
-        many: "In %{count} aspects"
-        one: "In %{count} aspect"
-        other: "In %{count} aspects"
-        zero: "Add to aspect"
+        few: "In %{count} crews"
+        many: "In %{count} crews"
+        one: "In %{count} crews"
+        other: "In %{count} crews"
+        zero: "Add to crew"
     destroy: 
-      failure: "Failed to remove person from aspect"
+      failure: "Blast! Failed to kick matey out yer crew"
       no_membership: "Could not find the selected person in that aspect"
       success: "Successfully removed person from aspect"
   aspects: 
@@ -67,12 +67,12 @@ pa:
     aspect_contacts: 
       done_editing: "done editing"
     aspect_listings: 
-      add_an_aspect: "+ Add an aspect"
+      add_an_aspect: "+ Add a crew"
     aspect_stream: 
       commented_on: "commented on"
       posted: "posted"
       recently: "recently:"
-      stream: "Stream"
+      stream: "The Sea"
     contacts_not_visible: "Contacts in this aspect will not be able to see each other."
     contacts_visible: "Contacts in this aspect will be able to see each other."
     create: 
@@ -87,16 +87,16 @@ pa:
       aspect_list_is_visible: "aspect list is visible to others in aspect"
       confirm_remove_aspect: "Are you sure you want to delete this aspect?"
       done: "Done"
-      make_aspect_list_visible: "make aspect list visible to others in aspect"
-      remove_aspect: "Delete this aspect"
-      rename: "ਨਾਂ-ਬਦਲੋ"
+      make_aspect_list_visible: "make aspect list visible?"
+      remove_aspect: "Fire this crew"
+      rename: "rename"
       update: "update"
       updating: "updating"
-    few: "%{count} aspects"
+    few: "%{count} crews"
     helper: 
       are_you_sure: "Are you sure you want to delete this aspect?"
       aspect_not_empty: "Aspect not empty"
-      remove: "ਹਟਾਓ"
+      remove: "remove"
     index: 
       cubbies: 
         explanation: "Cubbi.es is the first Diaspora application under development."
@@ -107,18 +107,18 @@ pa:
         content_2: "Give it to anyone and they'll be able to find you on Diaspora."
         heading: "Diaspora ID"
       donate: "Donate"
-      handle_explanation: "This is your diaspora handle. Like an email address, you can give this to people to reach you."
+      handle_explanation: "This is your diaspora id. Like an email address, you can give this to people to reach you."
       keep_us_running: "Keep %{pod} running fast, buy our servers their monthly coffee fix!"
-      no_contacts: "ਕੋਈ ਸੰਪਰਕ ਨਹੀਂ"
-      no_tags: "No tags"
+      no_contacts: "No mateys"
+      no_tags: "+ Find a tag to follow"
       people_sharing_with_you: "People sharing with you"
       post_a_message: "post a message >>"
       services: 
         content: "You can connect the following services to Diaspora:"
         heading: "Connect Services"
       tags_following: "Followed Tags"
-      your_aspects: "Your Aspects"
-    many: "%{count} aspects"
+      your_aspects: "Yer Crews"
+    many: "%{count} crews"
     move_contact: 
       error: "Error moving contact: %{inspect}"
       failure: "didn't work %{inspect}"
@@ -132,14 +132,14 @@ pa:
       try_adding_some_more_contacts: "You can search (top) or invite (right) more contacts."
       you_should_add_some_more_contacts: "You should add some more contacts!"
     no_posts_message: 
-      start_talking: "Nobody has said anything yet.  Get the conversation started!"
-    one: "1 aspect"
-    other: "%{count} aspects"
+      start_talking: "Nobody has said anything yet!"
+    one: "1 crew"
+    other: "%{count} crews"
     seed: 
       acquaintances: "Acquaintances"
-      family: "ਪਰਿਵਾਰ"
+      family: "Family"
       friends: "Friends"
-      work: "ਕੰਮ"
+      work: "Work"
     selected_contacts: 
       manage_your_aspects: "Manage your aspects."
       no_contacts: "You don't have any contacts here yet."
@@ -153,20 +153,20 @@ pa:
   authorizations: 
     index: 
       revoke_access: "Revoke Access"
-  back: "ਪਿੱਛੇ"
+  back: "Back"
   bookmarklet: 
-    explanation: "%{link} from anywhere by bookmarking this link."
-    explanation_link_text: "Post to Diaspora"
-    heading: "Diaspora Bookmarklet"
+    explanation: "Post to Diaspora from anywhere by bookmarking %{link}."
+    explanation_link_text: "this link"
+    heading: "Bookmarklet"
     post_something: "Post something to Diaspora"
     post_success: "Posted! Closing!"
-  cancel: "ਰੱਦ ਕਰੋ"
+  cancel: "Cancel"
   comments: 
     few: "%{count} comments"
     many: "%{count} comments"
     new_comment: 
-      comment: "ਟਿੱਪਣੀ"
-      commenting: "ਟਿੱਪਣੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+      comment: "Comment"
+      commenting: "Commenting..."
     one: "1 comment"
     other: "%{count} comments"
     zero: "no comments"
@@ -178,7 +178,7 @@ pa:
     few: "%{count} contacts"
     index: 
       add_a_new_aspect: "Add a new aspect"
-      all_contacts: "All Contacts"
+      all_contacts: "All yer mateys"
       edit_aspect: "Edit %{name}"
       many_people_are_you_sure: "Are you sure you want to start a private conversation with more than %{suggested_limit} contacts? Posting to this aspect may be a better way to contact them."
       my_contacts: "My Contacts"
@@ -186,14 +186,14 @@ pa:
       only_sharing_with_me: "Only sharing with me"
       remove_person_from_aspect: "Remove %{person_name} from \"%{aspect_name}\""
       start_a_conversation: "Start a conversation"
-      title: "Contacts"
-      your_contacts: "Your Contacts"
+      title: "Mateys"
+      your_contacts: "Yer Mateys"
     many: "%{count} contacts"
-    one: "1 ਸੰਪਰਕ"
-    other: "%{count} ਸੰਪਰਕ"
+    one: "1 contact"
+    other: "%{count} contacts"
     sharing: 
       people_sharing: "People sharing with you:"
-    zero: "ਕੋਈ ਸੰਪਰਕ ਨਹੀਂ"
+    zero: "no contacts"
   conversations: 
     create: 
       sent: "Message sent"
@@ -205,7 +205,7 @@ pa:
         many: "%{count} new messages"
         one: "1 new messages"
         other: "%{count} new messages"
-        zero: "no new messages"
+        zero: "No new messages"
     index: 
       create_a_new_message: "create a new message"
       inbox: "Inbox"
@@ -227,22 +227,22 @@ pa:
       birthday: "%B %d"
       birthday_with_year: "%B %d %Y"
       fullmonth_day: "%B %d"
-  delete: "ਹਟਾਓ"
-  email: "ਈਮੇਲ"
+  delete: "Delete"
+  email: "Email"
   error_messages: 
     helper: 
       correct_the_following_errors_and_try_again: "Correct the following errors and try again."
       invalid_fields: "Invalid Fields"
   fill_me_out: "Fill me out"
-  find_people: "Find people"
+  find_people: "Find people or #tags"
   hide: "Hide"
   home: 
     show: 
-      already_account: "ਪਹਿਲਾਂ ਹੀ ਅਕਾਊਂਟ ਹੈ?"
+      already_account: "already have an account?"
       choice: "Choice"
       choice_explanation: "Diaspora lets you sort your connections into groups called aspects. Unique to Diaspora, aspects ensure that your photos, stories and jokes are shared only with the people you intend."
       learn_about_host: "Learn about how to host your own Diaspora server."
-      login_here: "ਇੱਥੇ ਲਾਗਇਨ ਕਰੋ"
+      login_here: "log in here"
       ownership: "Ownership"
       ownership_explanation: "You own your pictures, and you shouldn’t have to give that up just to share them. You maintain ownership of everything you share on Diaspora, giving you full control over how it's distributed."
       share_what_you_want: "Share what you want, with whom you want."
@@ -264,7 +264,7 @@ pa:
       accept_your_invitation: "Accept your invitation"
       your_account_awaits: "Your account awaits!"
     new: 
-      already_invited: "Already invited"
+      already_invited: "The following people have not accepted your invitation:"
       aspect: "Aspect"
       comma_seperated_plz: "You can enter multiple email addresses separated by commas."
       if_they_accept_info: "if they accept, they will be added to the aspect you invited them."
@@ -276,18 +276,18 @@ pa:
       to: "To"
   layouts: 
     application: 
-      have_a_problem: "ਕੋਈ ਸਮੱਸਿਆ ਹੈ? ਹੱਲ਼ ਇੱਥੇ ਲੱਭੋ।"
+      have_a_problem: "Have a problem? Find an answer here"
       powered_by: "POWERED BY DIASPORA*"
       public_feed: "Public Diaspora Feed for %{name}"
       toggle: "toggle mobile site"
-      whats_new: "ਨਵਾਂ ਕੀ ਹੈ?"
+      whats_new: "what's new?"
       your_aspects: "your aspects"
     header: 
       admin: "admin"
-      blog: "ਬਲੌਗ"
-      code: "ਕੋਡ"
-      login: "ਲਾਗਇਨ"
-      logout: "ਲਾਗਆਉਟ"
+      blog: "blog"
+      code: "code"
+      login: "log in"
+      logout: "log out"
       profile: "profile"
       recent_notifications: "Recent notifications"
       settings: "settings"
@@ -295,17 +295,17 @@ pa:
   likes: 
     likes: 
       people_dislike_this: 
-        few: "%{count} people disliked this"
-        many: "%{count} people disliked this"
-        one: "1 person disliked this"
-        other: "%{count} people disliked this"
-        zero: "no people disliked this"
+        few: "%{count} dislikes"
+        many: "%{count} dislikes"
+        one: "%{count} dislike"
+        other: "%{count} dislikes"
+        zero: "no dislikes"
       people_like_this: 
-        few: "%{count} people liked this"
-        many: "%{count} people liked this"
-        one: "1 person liked this"
-        other: "%{count} people liked this"
-        zero: "no people liked this"
+        few: "%{count} likes"
+        many: "%{count} likes"
+        one: "%{count} like"
+        other: "%{count} likes"
+        zero: "no likes"
       people_like_this_comment: 
         few: "%{count} likes"
         many: "%{count} likes"
@@ -313,8 +313,8 @@ pa:
         other: "%{count} likes"
         zero: "no likes"
   limited: "Limited"
-  more: "ਹੋਰ"
-  next: "ਅੱਗੇ"
+  more: "More"
+  next: "next"
   no_results: "No Results Found"
   notifications: 
     also_commented: 
@@ -341,7 +341,7 @@ pa:
         many: "%{count} new notifications"
         one: "1 new notifications"
         other: "%{count} new notifications"
-        zero: "no new notifications"
+        zero: "No new notifications"
     index: 
       and: "and"
       and_others: 
@@ -376,7 +376,7 @@ pa:
       one: "%{actors} mentioned you in a deleted post."
       other: "%{actors} mentioned you in a deleted post."
       zero: "%{actors} mentioned you in a deleted post."
-    post: "ਪੋਸਟ"
+    post: "post"
     private_message: 
       few: "%{actors} sent you a message."
       many: "%{actors} sent you a message."
@@ -394,12 +394,12 @@ pa:
     comment_on_post: 
       reply: "Reply or view %{name}'s post >"
     confirm_email: 
-      click_link: "To activate your new e-mail address %{unconfirmed_email}, please click this link:"
-      subject: "Please activate your new e-mail address %{unconfirmed_email}"
+      click_link: "To activate your new email address %{unconfirmed_email}, please click this link:"
+      subject: "Please activate your new email address %{unconfirmed_email}"
     email_sent_by_diaspora: "This email was sent by Diaspora.  If you'd like to stop getting emails like this,"
-    hello: "ਹੈਲੋ %{name}!"
+    hello: "Hello %{name}!"
     liked: 
-      liked: "%{name} has just liked your post: "
+      liked: "%{name} just liked your post"
       view_post: "View post >"
     mentioned: 
       mentioned: "mentioned you in a post:"
@@ -411,14 +411,14 @@ pa:
       subject: "A message about your Diaspora account:"
     started_sharing: 
       sharing: "has started sharing with you!"
-      subject: "%{name} has started sharing with you on Diaspora*"
+      subject: "%{name} started sharing with you on Diaspora*"
       view_profile: "View %{name}'s profile"
     thanks: "Thanks,"
     to_change_your_notification_settings: "to change your notification settings"
-  ok: "ਠੀਕ ਹੈ"
-  or: "ਜਾਂ"
-  password: "ਪਾਸਵਰਡ"
-  password_confirmation: "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ"
+  ok: "OK"
+  or: "or"
+  password: "Password"
+  password_confirmation: "Password confirmation"
   people: 
     add_contact_small: 
       add_contact_from_tag: "add contact from tag"
@@ -427,7 +427,7 @@ pa:
     few: "%{count} people"
     helper: 
       people_on_pod_are_aware_of: " people on pod are aware of"
-      results_for: "%{params} ਲਈ ਨਤੀਜੇ"
+      results_for: " results for %{params}"
     index: 
       couldnt_find_them_send_invite: "Couldn't find them?  Send an invite!"
       no_one_found: "...and no one was found."
@@ -437,10 +437,10 @@ pa:
     one: "1 person"
     other: "%{count} people"
     person: 
-      add_contact: "ਸੰਪਰਕ ਸ਼ਾਮਲ"
-      already_connected: "ਪਹਿਲਾਂ ਹੀ ਕੁਨੈਕਟ ਹੈ"
-      pending_request: "pending request"
-      thats_you: "thats you!"
+      add_contact: "add contact"
+      already_connected: "Already connected"
+      pending_request: "Pending request"
+      thats_you: "That's you!"
     profile_sidebar: 
       bio: "bio"
       born: "birthday"
@@ -458,7 +458,7 @@ pa:
       incoming_request: "%{name} wants to share with you"
       mention: "Mention"
       message: "Message"
-      not_connected: "You are not sharing with %{name}"
+      not_connected: "You are not sharing with this person"
       recent_posts: "Recent Posts"
       recent_public_posts: "Recent Public Posts"
       return_to_aspects: "Return to your aspects page"
@@ -511,7 +511,7 @@ pa:
       destroy: "Delete"
       not_found: "Sorry, we couldn't find that post."
       permalink: "permalink"
-  previous: "ਪਿੱਛੇ"
+  previous: "previous"
   profile: "Profile"
   profiles: 
     edit: 
@@ -528,8 +528,8 @@ pa:
       your_photo: "Your photo"
       your_private_profile: "Your private profile"
       your_public_profile: "Your public profile"
-      your_tags: "You: in 5 #tags"
-      your_tags_placeholder: "i.e. #diaspora #ironing #kittens #music"
+      your_tags: "Describe yourself in 5 words"
+      your_tags_placeholder: "like #movies #kittens #travel #teacher #newyork"
     update: 
       failed: "Failed to update profile"
       updated: "Profile updated"
@@ -539,18 +539,18 @@ pa:
     create: 
       success: "You've joined Diaspora!"
     edit: 
-      cancel_my_account: "ਮੇਰਾ ਅਕਾਊਂਟ ਰੱਦ ਕਰੋ"
-      edit: "%{name} ਸੋਧ"
+      cancel_my_account: "Cancel my account"
+      edit: "Edit %{name}"
       leave_blank: "(leave blank if you don't want to change it)"
       password_to_confirm: "(we need your current password to confirm your changes)"
-      unhappy: "ਖੁਸ਼ ਨਹੀਂ?"
-      update: "ਅੱਪਡੇਟ"
+      unhappy: "Unhappy?"
+      update: "Update"
     new: 
       create_my_account: "Create my account"
-      enter_email: "ਈਮੇਲ ਦਿਓ"
-      enter_password: "ਪਾਸਵਰਡ ਦਿਓ"
-      enter_password_again: "ਪਹਿਲਾਂ ਵਾਲਾ ਪਾਸਵਰਡ ਦਿਓ"
-      enter_username: "ਯੂਜ਼ਰ ਨਾਂ ਚੁਣੋ (ਕੇਵਲ ਅੱਖਰ, ਅੰਕ ਅਤੇ ਹੇਠਾਂ ਲਾਈਨ)"
+      enter_email: "Enter an email"
+      enter_password: "Enter a password"
+      enter_password_again: "Enter the same password as before"
+      enter_username: "Pick a username (only letters, numbers, and underscores)"
       join_the_movement: "Join the movement!"
       sign_up_today: "Sign up today"
   requests: 
@@ -560,7 +560,7 @@ pa:
     destroy: 
       error: "Please select an aspect!"
       ignore: "Ignored contact request."
-      success: "ਹੁਣ ਤੁਸੀਂ ਦੋਸਤ ਹੋ।"
+      success: "You are now sharing."
     helper: 
       new_requests: 
         few: "%{count} new requests!"
@@ -572,22 +572,22 @@ pa:
       existing: "Existing contacts"
       manage_within: "Manage contacts within"
     new_request_to_person: 
-      sent: "ਭੇਜਿਆ!"
+      sent: "sent!"
   reshares: 
     create: 
       failure: "There was an error resharing this post."
     reshare: 
       deleted: "Original post deleted by author."
       reshare: 
-        few: "%{count} Reshares"
-        many: "%{count} Reshares"
-        one: "1 Reshare"
-        other: "%{count} Reshares"
+        few: "%{count} reshares"
+        many: "%{count} reshares"
+        one: "1 reshare"
+        other: "%{count} reshares"
         zero: "Reshare"
-      reshare_confirmation: "Reshare %{author} - %{text}?"
-      reshare_original: "Reshare orignial"
-      show_original: "Show Original"
-  search: "ਖੋਜ"
+      reshare_confirmation: "Reshare %{author}'s post?"
+      reshare_original: "Reshare original"
+      show_original: "Show original"
+  search: "Search"
   services: 
     create: 
       success: "Authentication successful."
@@ -605,39 +605,39 @@ pa:
       invite_your_friends_from: "Invite your friends from %{service}"
       not_connected: "not connected"
     index: 
-      connect_to_facebook: "ਫੇਸਬੁੱਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰੋ"
+      connect_to_facebook: "Connect to Facebook"
       connect_to_tumblr: "Connect to Tumblr"
-      connect_to_twitter: "ਟਵਿੱਟਰ ਨਾਲ ਕੁਨੈਕਟ ਕਰੋ"
-      disconnect: "ਕੁਨੈਕਸ਼ਨ ਖਤਮ ਕਰੋ"
-      edit_services: "ਸਰਵਿਸ ਸੋਧ"
-      logged_in_as: "ਇੰਝ ਲਾਗ ਕਰੋ"
+      connect_to_twitter: "Connect to Twitter"
+      disconnect: "disconnect"
+      edit_services: "Edit services"
+      logged_in_as: "logged in as"
       no_services: "You have not connected any services yet."
       really_disconnect: "disconnect %{service}?"
     inviter: 
       click_link_to_accept_invitation: "Click this link to accept your invitation"
       join_me_on_diaspora: "Join me on DIASPORA*"
     remote_friend: 
-      invite: "ਸੱਦਾ"
-      resend: "ਮੁੜ-ਭੇਜੋ"
+      invite: "invite"
+      resend: "resend"
   settings: "Settings"
   shared: 
     add_contact: 
       add_new_contact: "Add a new contact"
-      create_request: "Find by Diaspora handle"
-      diaspora_handle: "diaspora@handle.org"
+      create_request: "Find by Diaspora ID"
+      diaspora_handle: "diaspora@pod.org"
       enter_a_diaspora_username: "Enter a Diaspora username:"
       know_email: "Know their email address? You should invite them"
       your_diaspora_username_is: "Your Diaspora username is: %{diaspora_handle}"
     contact_list: 
-      all_contacts: "ਸਭ ਸੰਪਰਕ"
+      all_contacts: "All contacts"
     footer: 
       logged_in_as: "logged in as %{name}"
       your_aspects: "your aspects"
     invitations: 
-      by_email: "by Email"
+      by_email: "By email"
       dont_have_now: "You don't have any right now, but more invites are coming soon!"
       from_facebook: "From Facebook"
-      invitations_left: "(%{count} left)"
+      invitations_left: "%{count} left"
       invite_someone: "Invite someone"
       invite_your_friends: "Invite your friends"
       invites: "Invites"
@@ -648,26 +648,26 @@ pa:
       logged_in: "logged in to %{service}"
       manage: "manage connected services"
       outside: "Public messages will be available for others outside of Diaspora to see."
-      title: "You are about to post a public message!"
+      title: "Set up connected services"
     publisher: 
-      all: "ਸਭ"
-      all_contacts: "ਸਭ ਸੰਪਰਕਾਂ ਨਾਲ"
+      all: "all"
+      all_contacts: "all contacts"
       click_to_share_with: "Click to share with: "
       discard_post: "Discard post"
-      make_public: "ਪਬਲਿਕ ਬਣਾਓ"
+      make_public: "make public"
       post_a_message_to: "Post a message to %{aspect}"
-      posting: "ਪੋਸਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+      posting: "Posting..."
       publishing_to: "publishing to: "
-      share: "Share"
+      share: "Fire!"
       share_with: "share with"
       upload_photos: "Upload photos"
-      whats_on_your_mind: "ਤੁਹਾਡੇ ਦਿਮਾਗ 'ਚ ਕੀ ਹੈ?"
+      whats_on_your_mind: "What's on your mind?"
     reshare: 
       reshare: "Reshare"
     stream_element: 
-      dislike: "I dislike this"
-      like: "I like this"
-      shared_with: "Shared with: %{aspect_names}"
+      dislike: "Dislike"
+      like: "Like"
+      shared_with: "Fired at: %{aspect_names}"
       unlike: "Unlike"
       via: "via %{link}"
       viewable_to_anyone: "This post is viewable to anyone on the web"
@@ -677,7 +677,7 @@ pa:
     destroy: 
       failure: "Failed to delete post"
     helper: 
-      no_message_to_display: "ਵੇਖਾਉਣ ਲਈ ਕੋਈ ਸੁਨੇਹਾ ਨਹੀਂ ਹੈ।"
+      no_message_to_display: "No message to display."
     new: 
       mentioning: "Mentioning: %{person}"
     too_long: 
@@ -687,7 +687,7 @@ pa:
       other: "please make your status messages less than %{count} characters"
       zero: "please make your status messages less than %{count} characters"
   stream_helper: 
-    hide_comments: "ਟਿੱਪਣੀਆਂ ਓਹਲੇ ਕਰੋ"
+    hide_comments: "Hide all comments"
     show_more_comments: "Show %{number} more comments"
   tag_followings: 
     create: 
@@ -707,7 +707,7 @@ pa:
   tokens: 
     show: 
       connect_to_cubbies: "Connect to Cubbi.es"
-      connecting_is_simple: "Connecting your Diaspora account is as simple as filling out two fields on your Cubbi.es account page."
+      connecting_is_simple: "Connecting your Diaspora account is simple!  Just enter your Diaspora ID (<b>%{diaspora_id}</b>) from your cubbies <a href='%{href_link}'>settings page</a> and hit connect."
       daniels_account: "Daniel's Diaspora account"
       log_in_with_diaspora_is_comming: "Pretty soon, you'll be able to connect to a new application without creating an account separate from your one on Diaspora."
       love_to_try: "We'd love for you to try it out."
@@ -718,34 +718,34 @@ pa:
       via: "(via %{link})"
       what_is_cubbies: "Cubbi.es is the world's first Diaspora application.  It's also the best way to collect photos online."
   undo: "Undo?"
-  username: "ਯੂਜ਼ਰ ਨਾਂ"
+  username: "Username"
   users: 
     confirm_email: 
-      email_confirmed: "E-Mail %{email} activated"
-      email_not_confirmed: "E-Mail could not be activated. Wrong link?"
-    destroy: "Account successfully closed."
+      email_confirmed: "Email %{email} activated"
+      email_not_confirmed: "Email could not be activated. Wrong link?"
+    destroy: "Your account has been locked.  It may take 20 minutes for us to finish closing your account.  Thank you for trying Diaspora."
     edit: 
       also_commented: "...someone also comments on your contact's post?"
       change: "Change"
-      change_email: "Change E-Mail"
-      change_language: "Change Language"
-      change_password: "Change Password"
+      change_email: "Change email"
+      change_language: "Change language"
+      change_password: "Change password"
       close_account: "Close Account"
       comment_on_post: "...someone comments on your post?"
       current_password: "Current password"
       download_photos: "download my photos"
       download_xml: "download my xml"
       edit_account: "Edit account"
-      email_awaiting_confirmation: "We have sent you an activation link to %{unconfirmed_email}. Till you follow this link and activate the new address, we will continue to use your original address %{email}."
+      email_awaiting_confirmation: "We have sent you an activation link to %{unconfirmed_email}. Until you follow this link and activate the new address, we will continue to use your original address %{email}."
       export_data: "Export Data"
       liked: "...someone likes your post?"
       mentioned: "...you are mentioned in a post?"
-      new_password: "New Password"
+      new_password: "New password"
       private_message: "...you receive a private message?"
-      receive_email_notifications: "Receive email notificaions?"
+      receive_email_notifications: "Receive email notifications when..."
       started_sharing: "...someone starts sharing with you?"
       your_email: "Your email"
-      your_handle: "Your diaspora handle"
+      your_handle: "Your diaspora id"
     getting_started: 
       connect_to: "Connect to"
       connect_to_your_other_social_networks: "Connect to your other social networks"
@@ -756,7 +756,7 @@ pa:
       fill_out_your_profile: "Fill out your profile"
       find_friends: "Find friends"
       find_friends_from_facebook: "find friends from Facebook"
-      finished: "ਪੂਰਾ ਹੋਇਆ!"
+      finished: "Finished"
       follow_your_interests: "Follow your interests"
       hashtag_explanation: "Hashtags allow you to talk about and follow your interests.  They're also a great way to find new people on Diaspora."
       profile_description: "Make it easier for people to find you by filling out your profile information."
@@ -769,18 +769,18 @@ pa:
         photo: "Photo"
         tags: "Tags"
       see_all_featured_users: "See all featured users"
-      welcome: "ਦਿਸਪੋਰਾ ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ!"
+      welcome: "Welcome!"
       welcome_with_name: "Welcome, %{name}!"
     public: 
       does_not_exist: "User %{username} does not exist!"
     update: 
       email_notifications_changed: "Email notifications changed"
-      language_changed: "ਭਾਸ਼ਾ ਬਦਲੀ ਗਈ"
-      language_not_changed: "Language Change Failed"
-      password_changed: "ਪਾਸਵਰਡ ਬਦਲਿਆ ਗਿਆ"
-      password_not_changed: "Password Change Failed"
-      unconfirmed_email_changed: "E-Mail Changed. Needs activation."
-      unconfirmed_email_not_changed: "E-Mail Change Failed"
+      language_changed: "Language changed"
+      language_not_changed: "Language change failed"
+      password_changed: "Password changed.  You can now log in with your new password."
+      password_not_changed: "Password change failed"
+      unconfirmed_email_changed: "Email changed. Needs activation."
+      unconfirmed_email_not_changed: "Email change failed"
   webfinger: 
     fetch_failed: "failed to fetch webfinger profile for %{profile_url}"
     hcard_fetch_failed: "there was a problem fetching the hcard for %{account}"

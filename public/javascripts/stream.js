@@ -7,8 +7,8 @@ var Stream = {
   selector: "#main_stream",
 
   initialize: function() {
-    Diaspora.Page.timeAgo.updateTimeAgo();
-    Diaspora.Page.directionDetector.updateBinds();
+    Diaspora.page.timeAgo.updateTimeAgo();
+    Diaspora.page.directionDetector.updateBinds();
 
     $(".status_message_delete").tipsy({
       trigger: "hover",
@@ -19,7 +19,7 @@ var Stream = {
     //Stream.setUpImageLinks();
 
     Diaspora.page.subscribe("stream/scrolled", Stream.collapseText);
-    Stream.collapseText('eventID', Stream.selector);
+    Stream.collapseText('eventID', $(Stream.selector)[0]);
   },
   collapseText: function(){
     elements = $(Array.prototype.slice.call(arguments,1));
@@ -34,7 +34,7 @@ var Stream = {
     // collapse long comments
     $(".comment .content span", elements).expander({
       slicePoint: 200,
-      widow: 400,
+      widow: 18,
       expandText: Diaspora.I18n.t("show_more"),
       userCollapse: false
     });

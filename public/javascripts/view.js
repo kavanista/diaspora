@@ -59,6 +59,10 @@ var View = {
       .click(this.reshareButton.removeFocus);
 
     /* facebox */
+    $.facebox.settings.closeImage = '/images/facebox/closelabel.png';
+    $.facebox.settings.loadingImage = '/images/facebox/loading.gif';
+    $.facebox.settings.opacity = 0.75;
+
     $('a[rel*=facebox]').facebox();
     $(document).bind('reveal.facebox', function() {
       Diaspora.Page.directionDetector.updateBinds();
