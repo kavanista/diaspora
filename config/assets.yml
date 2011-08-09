@@ -30,6 +30,7 @@ javascripts:
     - public/javascripts/helpers/i18n.js
     - public/javascripts/helpers/alert.js
     - public/javascripts/widgets/header.js
+    - public/javascripts/widgets/search.js
     - public/javascripts/widgets/user-dropdown.js
     - public/javascripts/widgets/embedder.js
     - public/javascripts/widgets/timeago.js

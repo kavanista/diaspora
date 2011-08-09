@@ -20,5 +20,5 @@
     };
   };
 
-  Diaspora.Widgets.add("Stream", Stream);
+  Diaspora.Widgets.Stream = Stream;
 })();

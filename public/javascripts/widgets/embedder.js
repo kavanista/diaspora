@@ -76,5 +76,5 @@
     };
   };
 
-  Diaspora.Widgets.add("Embedder", Embedder);
+  Diaspora.Widgets.Embedder = Embedder;
 })();

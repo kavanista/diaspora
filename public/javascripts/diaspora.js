@@ -5,7 +5,8 @@
 
 (function() {
   var Diaspora = {
-    Pages: {}
+    Pages: {},
+    Widgets: {}
   };
 
   Diaspora.EventBroker = {
@@ -17,14 +18,14 @@
         publish: function(eventName, args) {
           var eventNames = eventName.split(" ");
 
-          for(var eventName in eventNames) {
+          for(eventName in eventNames) {
             this.eventsContainer.trigger(eventNames[eventName], args);
           }
         },
         subscribe: function(eventName, callback, context) {
           var eventNames = eventName.split(" ");
 
-          for(var eventName in eventNames) {
+          for(eventName in eventNames) {
             this.eventsContainer.bind(eventNames[eventName], $.proxy(callback, context));
           }
         }
@@ -34,17 +35,12 @@
     }
   };
 
-  Diaspora.Widgets = {
-    collection: {},
-    add: function(widgetName, Widget) {
-      this[widgetName] = this.collection[widgetName] = Widget;
-    }
-  };
-
   Diaspora.BaseWidget = {
     instantiate: function(Widget, element) {
       if(typeof Diaspora.Widgets[Widget] === "undefined") { throw new Error("Widget " + Widget + " does not exist"); }
+     
       $.extend(Diaspora.Widgets[Widget].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
+
       var widget = new Diaspora.Widgets[Widget](),
         args = Array.prototype.slice.call(arguments, 1);
 

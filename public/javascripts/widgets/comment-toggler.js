@@ -39,5 +39,5 @@
     };
   };
 
-  Diaspora.Widgets.add("CommentToggler", CommentToggler);
+  Diaspora.Widgets.CommentToggler = CommentToggler;
 })();

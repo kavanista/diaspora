@@ -91,5 +91,5 @@
     };
   };
 
-  Diaspora.Widgets.add("NotificationsDropdown", NotificationDropdown);
+  Diaspora.Widgets.NotificationsDropdown = NotificationDropdown;
 })();

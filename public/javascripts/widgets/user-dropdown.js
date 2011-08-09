@@ -2,13 +2,13 @@
   var UserDropdown = function() {
     var self = this;
 
-    this.subscribe("widget/ready", function(evt, userDropdown) {
+    this.subscribe("widget/ready", function(evt, menuElement) {
       $.extend(self, {
-        userDropdown: userDropdown
+        menuElement: menuElement
       });
 
-      self.userDropdown.click(self.toggleDropdown);
-      self.userDropdown.find("li a").slice(1, 3).click(function(evt) { evt.stopPropagation();});
+      self.menuElement.click(self.toggleDropdown);
+      self.menuElement.find("li a").slice(1, 3).click(function(evt) { evt.stopPropagation(); });
       $(document.body).click(self.hideDropdown);
     });
 
@@ -16,15 +16,15 @@
       evt.preventDefault();
       evt.stopPropagation();
 
-      self.userDropdown.toggleClass("active");
+      self.menuElement.toggleClass("active");
     };
 
     this.hideDropdown = function() {
-      if(self.userDropdown.hasClass("active") && !$(this).parents("#user_menu").length) {
-        self.userDropdown.removeClass("active");
+      if(self.menuElement.hasClass("active") && !$(this).parents("#user_menu").length) {
+        self.menuElement.removeClass("active");
       }
     };
   };
 
-  Diaspora.Widgets.add("UserDropdown", UserDropdown);
+  Diaspora.Widgets.UserDropdown = UserDropdown;
 })();

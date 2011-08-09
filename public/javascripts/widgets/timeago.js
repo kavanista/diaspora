@@ -35,5 +35,5 @@
     this.globalSubscribe("stream/scrolled stream/reloaded", self.updateTimeAgo);
   };
 
-  Diaspora.Widgets.add("TimeAgo", TimeAgo);
+  Diaspora.Widgets.TimeAgo = TimeAgo;
 })();

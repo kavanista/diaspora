@@ -19,7 +19,7 @@
     });
   };
 
-  Diaspora.Widgets.add("StreamElement", StreamElement);
+  Diaspora.Widgets.StreamElement = StreamElement;
 })();
 
 

@@ -115,7 +115,7 @@ describe("Diaspora", function() {
 
   beforeEach(function() {
     Diaspora.Widgets = oldWidgets;
-    Diaspora.Widgets.add("MyWidget", MyWidget);
+    Diaspora.Widgets.MyWidget = MyWidget;
   });
 
   describe("Widgets", function() {
@@ -144,7 +144,7 @@ describe("Diaspora", function() {
 
     describe("globalSubscribe", function() {
       it("calls subscribe on Diaspora.Page", function() {
-        var spy = spyOn(Diaspora.Page, "subscribe");
+        var spy = spyOn(Diaspora.page, "subscribe");
 
         var myWidget = Diaspora.BaseWidget.instantiate("MyWidget", null);
         myWidget.globalSubscribe();
@@ -155,7 +155,7 @@ describe("Diaspora", function() {
 
     describe("globalPublish", function() {
       it("calls publish on Diaspora.Page", function() {
-        var spy = spyOn(Diaspora.Page, "publish");
+        var spy = spyOn(Diaspora.page, "publish");
 
         var myWidget = Diaspora.BaseWidget.instantiate("MyWidget", null);
         myWidget.globalPublish();

@@ -132,5 +132,5 @@
     };
   };
 
-  Diaspora.Widgets.add("HoverCard", HoverCard);
+  Diaspora.Widgets.HoverCard = HoverCard;
 })();

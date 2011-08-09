@@ -144,5 +144,5 @@ jQuery.fn.center = (function() {
     };
   };
 
-  Diaspora.Widgets.add("Lightbox", Lightbox);
+  Diaspora.Widgets.Lightbox = Lightbox;
 })();

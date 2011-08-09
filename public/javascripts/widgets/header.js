@@ -12,10 +12,11 @@
         header.find("#notification_badge"),
         header.find("#notification_dropdown")
       );
-          
-      self.userDropdown = self.instantiate("UserDropdown", header.find("#user_menu"));
+
+      self.search = self.instantiate("Search", header.find("#global_search_form"));
+      self.menuElement = self.instantiate("UserDropdown", header.find("#user_menu"));
     });
   };
 
-  Diaspora.Widgets.add("Header", Header);
+  Diaspora.Widgets.Header = Header;
 })();

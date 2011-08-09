@@ -18,7 +18,7 @@ var Stream = {
     Stream.setUpAudioLinks();
     //Stream.setUpImageLinks();
 
-    Diaspora.widgets.subscribe("stream/scrolled", Stream.collapseText);
+    Diaspora.page.subscribe("stream/scrolled", Stream.collapseText);
     Stream.collapseText('eventID', Stream.selector);
   },
   collapseText: function(){

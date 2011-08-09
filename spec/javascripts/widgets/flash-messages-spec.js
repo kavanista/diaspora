@@ -1,8 +1,9 @@
 describe("Diaspora", function() {
-  describe("widgets", function() {
-    describe("flashes", function() {
+  describe("Widgets", function() {
+    describe("FlashMessages", function() {
+      var flashMessages;
+
       describe("animateMessages", function() {
-        var flashMessages;
         beforeEach(function() {
           flashMessages = Diaspora.BaseWidget.instantiate("FlashMessages");
           $("#jasmine_content").html(

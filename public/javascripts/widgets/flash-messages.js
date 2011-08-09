@@ -26,5 +26,5 @@
     };
   };
 
-  Diaspora.Widgets.add("FlashMessages", FlashMessages);
+  Diaspora.Widgets.FlashMessages = FlashMessages;
 })();

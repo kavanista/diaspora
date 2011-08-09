@@ -13,13 +13,10 @@ var WebSocketReceiver = {
             '</div>',
           incrementCount: false
         }); TODO:figure out why this fires so often */
-
-        WSR.debug("socket closed");
       }
     };
     ws.onopen = function() {
       ws.send(location.pathname);
-      WSR.debug("connected...");
     };
   },
 
@@ -29,30 +26,18 @@ var WebSocketReceiver = {
       if(obj['class'].match(/^notifications/)) {
         WebSocketReceiver.processNotification(obj);
       } else if (obj['class'] == 'people') {
-        WSR.debug("got a " + obj['class']);
         WebSocketReceiver.processPerson(obj);
-
       } else {
-        debug_string = "got a " + obj['class'];
-        if(obj.aspect_ids !== undefined){
-          debug_string +=  " for aspects " + obj.aspect_ids;
-        }
-
-        WSR.debug(debug_string);
-
         if (obj['class']=="retractions") {
           WebSocketReceiver.processRetraction(obj.post_guid);
-
         } else if (obj['class']=="comments") {
           WebSocketReceiver.processComment(obj.post_guid, obj.comment_guid, obj.html, {
             'notification': obj.notification,
             'mine?': obj['mine?'],
             'my_post?': obj['my_post?']
           });
-
         } else if (obj['class']=="likes") {
           WebSocketReceiver.processLike(obj.post_guid, obj.html);
-
         } else {
           WebSocketReceiver.processPost(obj.html, obj.aspect_ids);
         }
@@ -163,9 +148,6 @@ var WebSocketReceiver = {
   onPageOne: function() {
       var c = document.location.search.charAt(document.location.search.length-1);
       return ((c === '') || (c === '1'));
-  },
-  debug: function(str) {
-    $("#debug").append("<p>" +  str);
   }
 };
 var WSR = WebSocketReceiver;

@@ -82,5 +82,5 @@
     };
   };
 
-  Diaspora.Widgets.add("DirectionDetector", DirectionDetector);
+  Diaspora.Widgets.DirectionDetector = DirectionDetector;
 })();

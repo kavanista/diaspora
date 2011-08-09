@@ -69,5 +69,5 @@
     };
   };
 
-  Diaspora.Widgets.add("Notifications", Notifications);
+  Diaspora.Widgets.Notifications = Notifications;
 })();

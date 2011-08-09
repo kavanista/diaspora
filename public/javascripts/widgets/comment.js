@@ -9,5 +9,5 @@
     });
   };
 
-  Diaspora.Widgets.add("Comment", Comment);
+  Diaspora.Widgets.Comment = Comment;
 })();

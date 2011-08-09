@@ -29,5 +29,5 @@
     };
   };
 
-  Diaspora.Widgets.add("Likes", Likes);
+  Diaspora.Widgets.Likes = Likes;
 })();

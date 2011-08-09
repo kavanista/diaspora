@@ -49,6 +49,6 @@
     this.globalSubscribe("stream/reloaded", self.reInitialize, this);
   };
 
-  Diaspora.Widgets.add("InfiniteScroll", InfiniteScroll);
+  Diaspora.Widgets.InfiniteScroll = InfiniteScroll;
 })();
 

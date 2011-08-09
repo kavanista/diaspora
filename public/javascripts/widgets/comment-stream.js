@@ -50,5 +50,5 @@
     };
   };
 
-  Diaspora.Widgets.add("CommentStream", CommentStream);
+  Diaspora.Widgets.CommentStream = CommentStream;
 })();
